@@ -1,0 +1,82 @@
+node radiator(up1, down1, up2, down2, c1, c2: bool) returns (power,s: int)
+let
+    automaton
+     state Off do
+        power = 0;
+        s = 0;
+     unless up1 or not c1 then FrostProtection
+
+     state FrostProtection do
+        power = 300;
+        s= 1;
+     unless down1 or not c1 then Off |
+            up1 & c1 then Eco |
+            up2 & c2 then High
+
+     state Eco do
+        power = 1500;
+        s=2;
+     unless down1 or not c1 then FrostProtection |
+            up2 & c2 then High
+
+     state High do
+        power = 2000;
+        s=3;
+     unless down2 or not c2 then FrostProtection |
+            down1 or not c1 then Eco
+    
+    end 
+tel
+
+node room(precense: bool) returns (room_oc: bool)
+let
+    automaton
+    state Empty do
+        room_oc = false
+    unless precense then Ocupied
+    
+    state Ocupied do
+        room_oc = true
+    unless not precense then Empty
+
+    end
+tel
+
+node fonteLuz(onn, c1, c2: bool) returns (luz_on: bool)
+let
+    automaton
+     state Off do 
+        luz_on = false;
+     unless (onn & c1) or not c2 then On
+
+     state On do
+        luz_on = true;
+     unless (onn & c2) or not c1 then Off
+    
+    end 
+tel
+
+
+
+node rule(precense, on_lamp, on_tv, up1, down1, up2, down2: bool) returns (room_oc,tv_on,lamp_on: bool; power,ss : int)
+
+     
+    contract
+    var
+        rule1,rule4: bool;
+
+    let 
+        rule1 = not room_oc or (lamp_on or tv_on);
+        rule4 = room_oc or (not(lamp_on or tv_on) & (ss<2))
+        
+    tel
+     enforce rule1 & rule4 
+     with (c_lamp1,c_lamp2, c_tv1,c_tv2,c1, c2:bool)
+     
+let
+    lamp_on = inlined fonteLuz(on_lamp,c_lamp1,c_lamp2);
+    tv_on = inlined fonteLuz(on_tv,c_tv1,c_tv2);
+    room_oc = inlined room(precense);
+    (power,ss) = inlined radiator(up1, down1, up2, down2, c1, c2)
+
+tel
