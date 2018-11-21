@@ -13,6 +13,7 @@ CC=gcc
 HEPTC=heptc
 HEPTS=hepts
 SIGALI=/home/ubuntu/Sigali-2.4/bin/sigali
+PROG=/home/osboxes/alunos/joao/prog.py
 
 HEPT_LIB_C=/usr/local/lib/heptagon/c
 
@@ -60,6 +61,9 @@ $(CTRLR_PROG).ept: $(CONTRACT_PROG)_z3z/$(CONTRACT_NODE).z3z
 
 $(CTRLR_PROG).epci $(CTRLR_PROG)_c/$(CTRLR_PROG).c: $(CTRLR_PROG).ept
 #	$(HEPTC) -target c $(CTRLR_PROG).ept
+
+$(CONTRACT_PROG)_c/_main.c:
+	python $(PROG) $@
 
 %.o: %.c
 	$(CC) -c $(CFLAGS) $< -o $@
