@@ -1,9 +1,9 @@
-SIM_PROG=washingMachine
+
+SIM_PROG=pratica05
 # same as SIM_PROG, capitalized
-SIM_MOD=Onetask
-SIM_NODE=onetask
-CONTRACT_NODE=onetask
-SIM_WEB=webservices
+SIM_MOD=Task
+SIM_NODE=task
+CONTRACT_NODE=task
 
 # This generic Makefile does not allow contract and simulated node in
 # two different modules (can be two different nodes, though)
@@ -13,15 +13,9 @@ CONTRACT_MOD=$(SIM_MOD)
 CC=gcc
 HEPTC=heptc
 HEPTS=hepts
-SIGALI=/home/ubuntu/Sigali-2.4/bin/sigali
-PROG=/home/osboxes/Documents/tmc/prog.py
-
+SIGALI=/home/osboxes/tmc/Sigali-2.4/bin/sigali
 
 HEPT_LIB_C=/usr/local/lib/heptagon/c
-MICRO_HTTP_LIB=/usr/lib/x86_64-linux-gnu/libmicrohttpd.so
-MAIN_DIR = /home/osboxes/Documents/tmc/$(SIM_PROG)_c/
-
-
 
 CTRLR_PROG=$(CONTRACT_NODE)_controller
 
@@ -47,10 +41,9 @@ CTRLR_OBJS = $(CTRLR_C_FILES:.c=.o)
 all: sim
 
 sim: $(SIM_NODE)_sim $(SIM_PROG).epci
-	
 #	$(HEPTS) -mod $(SIM_MOD) -node $(SIM_NODE) -exec ./$(SIM_NODE)_sim
 
-$(SIM_NODE)_sim: $(SIM_PROG)_c/_main.o $(HEPT_OBJS) #$(CTRLR_OBJS)
+$(SIM_NODE)_sim: $(SIM_PROG)_c/_main.o $(HEPT_OBJS) $(CTRLR_OBJS)
 	$(CC) $(LDFLAGS) -o $(SIM_NODE)_sim $^
 
 $(CONTRACT_PROG)_z3z/$(CONTRACT_NODE).z3z: $(CONTRACT_PROG).ept
@@ -64,25 +57,19 @@ $(CONTRACT_PROG)_c/_main.c: $(CONTRACT_PROG)_z3z/$(CONTRACT_NODE).z3z
 	$(HEPTC) $<
 
 $(CTRLR_PROG).ept: $(CONTRACT_PROG)_z3z/$(CONTRACT_NODE).z3z
-#	$(SIGALI) < $(CONTRACT_PROG)_z3z/$(CONTRACT_NODE).z3z > /dev/null
+	$(SIGALI) < $(CONTRACT_PROG)_z3z/$(CONTRACT_NODE).z3z > /dev/null
 
 $(CTRLR_PROG).epci $(CTRLR_PROG)_c/$(CTRLR_PROG).c: $(CTRLR_PROG).ept
-#	$(HEPTC) -target c $(CTRLR_PROG).ept
+	$(HEPTC) -target c $(CTRLR_PROG).ept
 
 %.o: %.c
 	$(CC) -c $(CFLAGS) $< -o $@
-	
-sim:
-	python $(PROG) $(SIM_PROG).ept 
-	$(CC) -c  -I $(HEPT_LIB_C) -I $(MAIN_DIR) -o $(SIM_WEB).o -g -fstack-protector $(SIM_WEB).c
-	$(CC) -o $(SIM_WEB)_sim $(SIM_WEB).o $(MAIN_DIR)/$(SIM_PROG).o $(MICRO_HTTP_LIB)
 
 clean:
 	rm -fr $(HEPT_C_DIRS) $(HEPT_Z3Z_DIRS) $(HEPT_JAVA_DIRS)
 	rm -f $(SIM_NODE)_sim main.*
 	rm -f *.epci *.mls *.ml *.obc ./*~
 	rm -f $(CTRLR_PROG).ept
-	rm -f $(SIM_WEB).c $(SIM_WEB).o $(SIM_WEB)_sim
 
 # Dependences
 

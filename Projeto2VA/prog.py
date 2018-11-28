@@ -31,7 +31,12 @@ def lineToAutomaton(line):
   entradas = entradas.split(",")
   print entradas
   
-  saidas = line[1][2:-1]
+  saidas = line[1].strip()[1:-1]
+  
+  saidas = saidas.split(';')
+  print (saidas)
+  
+  
   saidas = saidas.split(":")[0]
   saidas = saidas.split(",")
   print saidas

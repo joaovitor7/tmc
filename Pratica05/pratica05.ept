@@ -1,0 +1,191 @@
+node rad(up1, down1, up2, down2, c1, c2 : bool) returns (power, ss: int)
+let
+	automaton
+		state OFF do
+			power = 0;
+			ss = 0;
+		unless up1 or not c1 then FROST
+		state FROST do
+			power = 300;
+			ss = 1;
+		unless up1 & c1 then ECO
+			| down1 or not c1 then OFF
+			| up2 & c2 then HIGHT
+		state ECO do 
+			power = 1500;
+			ss = 2;
+		unless down1 or not c1 then FROST
+			| up2 & c2 then HIGHT
+		state HIGHT do
+			power = 2000;
+			ss = 3;
+		unless down1 & not c1 then ECO
+			| down2 & not c2 then FROST
+	end
+tel
+
+type spl = S1|S2|S3
+
+node police(eco, confort: bool) returns (pl: int; s: spl)
+let
+	automaton
+		state MS do
+			pl = 3000;
+			s = S1;
+		unless eco then ECO
+			|confort then CONFORT
+		state ECO do
+			pl = 5000;
+			s = S2;
+		unless not eco then MS
+			| confort then CONFORT
+		state CONFORT do
+			pl= 7000;
+			s = S3;
+		unless not confort then MS
+			| eco then ECO
+	end
+tel
+
+node ws( s, e ,c:bool) returns (power: int)
+let
+	automaton
+		state OFF do
+			power = 0;
+		unless s then WF
+		state WF do
+			power = 15;
+		unless e & c then WASHING
+			| e & not c then STANDBY
+		state WASHING do
+			power = 250;
+		unless e then RINSE
+		state RINSE do
+			power = 200;
+		unless e then SPIN
+		state SPIN do
+			power = 800;
+		unless e then OFF
+		state STANDBY do
+			power = 0;
+		unless c then WASHING
+	end
+tel
+
+node oven(finish, start, cold, temp_ok, c: bool) returns(power: int)
+let
+	automaton
+		state OFF do
+			power=0;
+			
+		unless start & not c then STANDBY
+			| start & c then HEAT
+		state HEAT do
+			power=1500;
+			
+		unless finish then OFF
+			| temp_ok then MAINTAIN
+		state STANDBY do
+			power=0;
+			
+		unless c then HEAT
+		state MAINTAIN do
+			power=300;
+			
+		unless cold & c then REHEAT
+			| finish then OFF
+		state REHEAT do
+			power=1000;
+			
+		unless temp_ok then MAINTAIN
+			| finish then OFF
+	end
+tel
+
+node room(precense: bool) returns (room_oc: bool)
+let
+    automaton
+    state Empty do
+        room_oc = false
+    unless precense then Ocupied
+    
+    state Ocupied do
+        room_oc = true
+    unless not precense then Empty
+
+    end
+tel
+
+node fonteLuz(onn, c1, c2: bool) returns (luz_on: bool)
+let
+    automaton
+     state Off do 
+        luz_on = false;
+     unless (onn & c1) or not c2 then On
+
+     state On do
+        luz_on = true;
+     unless (onn & c2) or not c1 then Off
+    
+    end 
+tel
+
+node window(push, c_window: bool) returns (window_open: bool)
+let
+    automaton
+     state Closed do 
+        window_open = false;
+     unless push & c_window then Open
+
+     state Open do
+        window_open = true;
+     unless push or not c_window then Closed
+    
+    end 
+tel
+
+node door(push, c_door: bool) returns (door_open: bool)
+let
+    automaton
+     state Closed do 
+        door_open = false;
+     unless push & c_door then Open
+
+     state Open do
+        door_open = true;
+     unless push or not c_door then Closed
+    
+    end 
+tel
+
+
+
+node task(up1, down1, up2, down2, s, e, finish, start, cold, temp_ok, eco, confort,on_lamp,on_tv,precense,push_door,push_window: bool) returns(pl,p1, p2, p3, ss: int; sp: spl; lamp_on,tv_on,room_oc,door_open,window_open:bool)
+	contract
+		var rule1,rule2,rule3,rule4,rule5: bool;
+		let
+			rule1 = not room_oc or (lamp_on or tv_on);
+			rule2 = room_oc or not(door_open or window_open);
+        	rule3 = not(door_open or window_open) or (ss = 0 or ss = 1);
+        	rule4 = room_oc or (not(lamp_on or tv_on) & (ss < 2));
+			
+			switch sp
+				| S1 do rule5 = p1+p2+p3 <= 3000
+				| S2 do rule5 = p1+p2+p3 <= 5000
+				| S3 do rule5 = p1+p2+p3 <= 7000
+			end 
+			
+		tel 
+	 enforce (rule1 & rule2 & rule3 & rule4 & rule5)
+	with(c1,c2,c3,c4,c_lamp1,c_lamp2,c_tv2,c_tv1,c_door,c_window: bool)
+let
+	(pl, sp)= inlined police(eco, confort);
+	(p1,ss) = inlined rad(up1, down1, up2, down2, c1, c2);
+	p2 = inlined ws(s, e, c3);
+	p3 = inlined oven(finish, start, cold, temp_ok, c4);
+	lamp_on = inlined fonteLuz(on_lamp,c_lamp1,c_lamp2);
+    tv_on = inlined fonteLuz(on_tv,c_tv1,c_tv2);
+    room_oc = inlined room(precense);
+    door_open = inlined door(push_door, c_door);
+    window_open = inlined window(push_window, c_window);
+tel
