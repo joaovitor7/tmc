@@ -1,5 +1,5 @@
 import sys
-
+import re
 
 file = open(sys.argv[1],'r')
 
@@ -32,12 +32,33 @@ def lineToAutomaton(line):
   print entradas
   
   saidas = line[1].strip()[1:-1]
+  print (saidas)
+
+  
+  def subst(x):
+    
+    if ('int' in x):
+      x = re.sub('\:.*','',x)
+      return x  
+      
+    elif ('bool' in x):
+      x = re.sub('\:.*','',x)
+      return x
+    
+    else:
+      x = ''
+      return x
   
   saidas = saidas.split(';')
-  print (saidas)
+  saidas = map(subst ,saidas)
   
+  if ('' in saidas):
+    saidas.remove('')
   
-  saidas = saidas.split(":")[0]
+  saidas = ','.join(saidas)
+  
+
+    
   saidas = saidas.split(",")
   print saidas
   print("----------")
