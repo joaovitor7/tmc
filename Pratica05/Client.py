@@ -11,9 +11,11 @@ def createWebClientHtml(task):
     entradas = task['entradas']
 
     def createInputs(x):
+
+        x = x.strip()
         x = '''
             <div class="checkbox">
-                <label><input type="checkbox" id = "%s"value="">%s</label>
+                <label><input type="checkbox" name = "%s">%s</label>
             </div>''' % (x, x)
         return x
 
@@ -71,27 +73,39 @@ def createWebClientFlask(task):
 
 
     def lineEntrada(entrada):
-        x = '''%s = request.form.get("%s")''' % (entrada, entrada)
+        entrada = entrada.strip()
+        x = '''%s = (request.form.get("%s") == 'on')*1''' % (entrada, entrada)
         return x
-
+    def lineUrl(entrada):
+        entrada = entrada.strip()
+        x = entrada + '=%s'
+        return x
     lines = list(map(lineEntrada, entradas))
 
-    lines = '\n'.join(lines)
+    linesUrl = list(map(lineUrl, entradas))
 
-    flaskPy.write( '''
-    from flask import render_template, request, url_for, redirect
-    import json
-    import requests
-    
-    
-    @app.route('/')
-    def index():
-        return render_template("main.html")
-    
-    @app.route("/resposta", methods=["POST"])
-    def resposta():
-        if (request.method == "POST"):
-            %s
-    ''' % lines)
+    linesUrl = ('&'.join(linesUrl)) + "'"
+
+    lines = '\n\t\t'.join(lines)
+
+    entradas = "% ("+(','.join(entradas))+")"
+
+    linesUrl = "url = 'localhost:8082/?" + linesUrl + entradas
+
+    flaskPy.write('''
+from flask import Flask, render_template, request, url_for, redirect
+import json
+import requests
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    return render_template("main.html")
+
+@app.route("/resposta", methods=["POST"])\ndef resposta():\n\tif (request.method == "POST"):\n\t\t%s\n\t\t%s\n\t\tr = requests.get(url)\n\t\tresposta = json.dumps(r.text)\n\t\treturn resposta
+
+if __name__ == '__main__':
+   app.run(debug = True)
+    ''' % (lines, linesUrl))
 
 
