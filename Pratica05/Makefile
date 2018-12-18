@@ -84,7 +84,8 @@ clean:
 	rm -f $(SIM_NODE)_sim main.*
 	rm -f *.epci *.mls *.ml *.obc ./*~
 	rm -f $(CTRLR_PROG).ept
-	rm -f $(SIM_WEB).c $(SIM_WEB).o $(SIM_WEB)_sim
+	rm -f $(SIM_WEB).c $(SIM_WEB).o $(SIM_WEB)_sim mainWeb.py
+	rm -Rf ./templates
 
 # Dependences
 

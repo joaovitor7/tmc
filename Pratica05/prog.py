@@ -1,10 +1,25 @@
 import sys
 import re
+from Client import *
 
 file = open(sys.argv[1],'r')
 
 fileName = file.name[:-4]
 
+tipos = ['int', 'bool']
+tiposEspecias = {}
+
+def numBits(numero):
+  if numero > 2:
+    resto  = numero % 2
+    if resto == 0:
+      r = numero/2
+      return r
+    else:
+      r = (numero/2) + 1
+      return r
+  else:
+    return 1
 
 def startWithNode(line):
   if line[0:4] == 'node':
@@ -12,8 +27,17 @@ def startWithNode(line):
   else:
     return False
 
+def searchForTypes(line):
 
-lines = file.readlines();
+  if line[0:4] == 'type':
+    line = line.split(' ')
+    tipoName = line[1]
+    tipoTipos = line[-1].split('|')
+    tipos.append(tipoName)
+    tiposEspecias[tipoName] = numBits(len(tipoTipos))
+
+lines = file.readlines()
+list(map(searchForTypes, lines))
 lines = filter(startWithNode, lines)
 
 automatonsList = []
@@ -23,13 +47,13 @@ def lineToAutomaton(line):
   line = line.split("returns")
   
   name = line[0].split('(')[0]
-  print name
+  print (name)
   
   entradas = line[0].split('(')[1]
   entradas = entradas[0:-2]
   entradas = entradas.split(":")[0]
   entradas = entradas.split(",")
-  print entradas
+  print (entradas)
   
   saidas = line[1].strip()[1:-1]
   print (saidas)
@@ -46,11 +70,17 @@ def lineToAutomaton(line):
       return x
     
     else:
+
+      name = x.split(':')
+      multiplicador = tiposEspecias[name[1].strip()]
       x = ''
-      return x
+      for i in range(1, multiplicador+1):
+        x += name[0]+str(i)+','
+
+      return x[0:-1]
   
   saidas = saidas.split(';')
-  saidas = map(subst ,saidas)
+  saidas = map(subst, saidas)
   
   if ('' in saidas):
     saidas.remove('')
@@ -60,7 +90,7 @@ def lineToAutomaton(line):
 
     
   saidas = saidas.split(",")
-  print saidas
+  print (saidas)
   print("----------")
 
   automaton = {'name':name,'entradas': entradas,'saidas':saidas}
@@ -231,6 +261,6 @@ file2=open('webservices.c','w')
 file2.write(webservice)
 file2.close()
 
-  
-
+createWebClientHtml(task)
+createWebClientFlask(task)
 
