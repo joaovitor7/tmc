@@ -75,7 +75,7 @@ def lineToAutomaton(line):
       multiplicador = tiposEspecias[name[1].strip()]
       x = ''
       for i in range(1, multiplicador+1):
-        x += name[0]+str(i)+','
+        x += name[0].strip()+'_'+str(i)+','
 
       return x[0:-1]
   
