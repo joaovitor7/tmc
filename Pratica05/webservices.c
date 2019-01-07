@@ -50,10 +50,10 @@ answer_to_connection (void *cls, struct MHD_Connection *connection,
   MHD_get_connection_values(connection, MHD_GET_ARGUMENT_KIND, &save_items, NULL);
   printf("Counter:%d", glob_cnt);
   
-  glob_cnt = 0; int step_c;int step_max;int up1;int  down1;int  up2;int  down2;int  s;int  e;int  finish;int  start;int  cold;int  temp_ok;int  eco;int  confort;int on_lamp;int on_tv;int precense;int push_door;int push_window;Pratica05__task_out _res;
+  glob_cnt = 0; int step_c;int step_max;int up1;int down1;int up2;int down2;int s;int e;int finish;int start;int cold;int temp_ok;int eco;int confort;int on_lamp;int on_tv;int precense;int push_door;int push_window;Pratica05__task_out _res;
   int i;
   for(i= 0; i < n; i++){
-if (strcmp(dict[i].key, "up1") == 0){ up1= atoi(dict[i].value);} else if (strcmp(dict[i].key, " down1") == 0){  down1= atoi(dict[i].value);} else if (strcmp(dict[i].key, " up2") == 0){  up2= atoi(dict[i].value);} else if (strcmp(dict[i].key, " down2") == 0){  down2= atoi(dict[i].value);} else if (strcmp(dict[i].key, " s") == 0){  s= atoi(dict[i].value);} else if (strcmp(dict[i].key, " e") == 0){  e= atoi(dict[i].value);} else if (strcmp(dict[i].key, " finish") == 0){  finish= atoi(dict[i].value);} else if (strcmp(dict[i].key, " start") == 0){  start= atoi(dict[i].value);} else if (strcmp(dict[i].key, " cold") == 0){  cold= atoi(dict[i].value);} else if (strcmp(dict[i].key, " temp_ok") == 0){  temp_ok= atoi(dict[i].value);} else if (strcmp(dict[i].key, " eco") == 0){  eco= atoi(dict[i].value);} else if (strcmp(dict[i].key, " confort") == 0){  confort= atoi(dict[i].value);} else if (strcmp(dict[i].key, "on_lamp") == 0){ on_lamp= atoi(dict[i].value);} else if (strcmp(dict[i].key, "on_tv") == 0){ on_tv= atoi(dict[i].value);} else if (strcmp(dict[i].key, "precense") == 0){ precense= atoi(dict[i].value);} else if (strcmp(dict[i].key, "push_door") == 0){ push_door= atoi(dict[i].value);} else if (strcmp(dict[i].key, "push_window") == 0){ push_window= atoi(dict[i].value);} else 
+if (strcmp(dict[i].key, "up1") == 0){ up1= atoi(dict[i].value);} else if (strcmp(dict[i].key, "down1") == 0){ down1= atoi(dict[i].value);} else if (strcmp(dict[i].key, "up2") == 0){ up2= atoi(dict[i].value);} else if (strcmp(dict[i].key, "down2") == 0){ down2= atoi(dict[i].value);} else if (strcmp(dict[i].key, "s") == 0){ s= atoi(dict[i].value);} else if (strcmp(dict[i].key, "e") == 0){ e= atoi(dict[i].value);} else if (strcmp(dict[i].key, "finish") == 0){ finish= atoi(dict[i].value);} else if (strcmp(dict[i].key, "start") == 0){ start= atoi(dict[i].value);} else if (strcmp(dict[i].key, "cold") == 0){ cold= atoi(dict[i].value);} else if (strcmp(dict[i].key, "temp_ok") == 0){ temp_ok= atoi(dict[i].value);} else if (strcmp(dict[i].key, "eco") == 0){ eco= atoi(dict[i].value);} else if (strcmp(dict[i].key, "confort") == 0){ confort= atoi(dict[i].value);} else if (strcmp(dict[i].key, "on_lamp") == 0){ on_lamp= atoi(dict[i].value);} else if (strcmp(dict[i].key, "on_tv") == 0){ on_tv= atoi(dict[i].value);} else if (strcmp(dict[i].key, "precense") == 0){ precense= atoi(dict[i].value);} else if (strcmp(dict[i].key, "push_door") == 0){ push_door= atoi(dict[i].value);} else if (strcmp(dict[i].key, "push_window") == 0){ push_window= atoi(dict[i].value);} else 
     {
       printf("Not implemented %s", dict[i].key);
     }
@@ -62,7 +62,7 @@ if (strcmp(dict[i].key, "up1") == 0){ up1= atoi(dict[i].value);} else if (strcmp
   for(i= 0; i < n; i++)
   {
     printf("%s, %s",dict[i].key, dict[i].value);
-  }  Pratica05__task_step(up1, down1, up2, down2, s, e, finish, start, cold, temp_ok, eco, confort,on_lamp,on_tv,precense,push_door,push_window,
+  }  Pratica05__task_step(up1,down1,up2,down2,s,e,finish,start,cold,temp_ok,eco,confort,on_lamp,on_tv,precense,push_door,push_window,
   &_res, &mem);
 
   char aux[1];

@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template("main.html", resposta = []))
+    return render_template("main.html",resposta = [])
 
 @app.route("/resposta", methods=["POST"])
 def resposta():
@@ -28,7 +28,7 @@ def resposta():
 		precense = (request.form.get("precense") == 'on')*1
 		push_door = (request.form.get("push_door") == 'on')*1
 		push_window = (request.form.get("push_window") == 'on')*1
-		url = 'http:// localhost:8082/?up1=%s&down1=%s&up2=%s&down2=%s&s=%s&e=%s&finish=%s&start=%s&cold=%s&temp_ok=%s&eco=%s&confort=%s&on_lamp=%s&on_tv=%s&precense=%s&push_door=%s&push_window=%s'% (up1, down1, up2, down2, s, e, finish, start, cold, temp_ok, eco, confort,on_lamp,on_tv,precense,push_door,push_window)
+		url = 'http://127.0.0.1:8082/?up1=%s&down1=%s&up2=%s&down2=%s&s=%s&e=%s&finish=%s&start=%s&cold=%s&temp_ok=%s&eco=%s&confort=%s&on_lamp=%s&on_tv=%s&precense=%s&push_door=%s&push_window=%s'% (up1,down1,up2,down2,s,e,finish,start,cold,temp_ok,eco,confort,on_lamp,on_tv,precense,push_door,push_window)
 		r = requests.get(url)
 		resposta = json.dumps(r.text)
 		stringResposta = r.text[1:-1]
@@ -37,7 +37,7 @@ def resposta():
 			line = line
 			return  line
 		resposta = list(map(lineToHtml,listaResposta))
-		return render_template('/', resposta)
+		return render_template('main.html', resposta=resposta)
 if __name__ == '__main__':
    app.run(debug = True)
     

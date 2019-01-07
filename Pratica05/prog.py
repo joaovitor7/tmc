@@ -54,7 +54,9 @@ def lineToAutomaton(line):
   entradas = entradas.split(":")[0]
   entradas = entradas.split(",")
   print (entradas)
-  
+  def tirarEspacos(x):
+    return x.strip()
+  entradas = list(map(tirarEspacos,entradas))
   saidas = line[1].strip()[1:-1]
   print (saidas)
 

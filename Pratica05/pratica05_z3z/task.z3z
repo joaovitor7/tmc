@@ -1,0 +1,1090 @@
+% --- Generated the 7/1/2019 at 8:11 --- %
+% --- heptagon compiler, version 1.03.00 (compiled thu. may. 3 2:35:29 CET 2018) --- %
+% --- Command line: /usr/local/bin/heptc -target c -target z3z -s task pratica05.ept --- %
+
+set_reorder(2);read("Property.lib");read("Synthesis.lib");read("Verif_Determ.lib");read("Simul.lib");read("Synthesis_Partial_order.lib");read("Orbite.lib");
+% -- dependencies --- %
+
+% ---------- process task ---------- %
+
+declare(task_up1, task_down1, task_up2, task_down2, task_s, task_e,
+        task_finish, task_start, task_cold, task_temp_ok, task_eco,
+        task_confort, task_on_lamp, task_on_tv, task_precense,
+        task_push_door, task_push_window, task_c_window, task_c_door,
+        task_c_tv1, task_c_tv2, task_c_lamp2, task_c_lamp1, task_c4, task_c3,
+        task_c2, task_c1, task_v_420, task_v_419, task_pnr_8, task_v_400,
+        task_v_399, task_pnr_7, task_v_364, task_v_363, task_v_362,
+        task_pnr_6, task_v_311, task_v_310, task_v_309, task_pnr_5,
+        task_ck_17_1, task_pnr_4, task_ck_19_1, task_pnr_3, task_ck_21_1,
+        task_pnr_2, task_ck_23_1, task_pnr_1, task_ck_25_1, task_pnr,
+        task_error_state);
+conditions : [task_up1, task_down1, task_up2, task_down2, task_s, task_e,
+              task_finish, task_start, task_cold, task_temp_ok, task_eco,
+              task_confort, task_on_lamp, task_on_tv, task_precense,
+              task_push_door, task_push_window, task_c_window, task_c_door,
+              task_c_tv1, task_c_tv2, task_c_lamp2, task_c_lamp1, task_c4,
+              task_c3, task_c2, task_c1];
+states : [task_v_420, task_v_419, task_pnr_8, task_v_400, task_v_399,
+          task_pnr_7, task_v_364, task_v_363, task_v_362, task_pnr_6,
+          task_v_311, task_v_310, task_v_309, task_pnr_5, task_ck_17_1,
+          task_pnr_4, task_ck_19_1, task_pnr_3, task_ck_21_1, task_pnr_2,
+          task_ck_23_1, task_pnr_1, task_ck_25_1, task_pnr, task_error_state];
+controllables : [task_c_window, task_c_door, task_c_tv1, task_c_tv2,
+                 task_c_lamp2, task_c_lamp1, task_c4, task_c3, task_c2,
+                 task_c1];
+evolutions : [];
+initialisations : [];
+task_ck_9_2 : task_v_420;
+task_ck_9_1 : task_v_419;
+task_confort_1 : task_confort;
+task_eco_1 : task_eco;
+task_ck_11_2 : task_v_400;
+task_ck_11_1 : task_v_399;
+task_c2_1 : task_c2;
+task_c1_1 : task_c1;
+task_down2_1 : task_down2;
+task_up2_1 : task_up2;
+task_down1_1 : task_down1;
+task_up1_1 : task_up1;
+task_ck_13_3 : task_v_364;
+task_ck_13_2 : task_v_363;
+task_ck_13_1 : task_v_362;
+task_c : task_c3;
+task_e_1 : task_e;
+task_s_2 : task_s;
+task_ck_15_3 : task_v_311;
+task_ck_15_2 : task_v_310;
+task_ck_15_1 : task_v_309;
+task_c_1 : task_c4;
+task_temp_ok_1 : task_temp_ok;
+task_cold_1 : task_cold;
+task_start_1 : task_start;
+task_finish_1 : task_finish;
+task_c2_2 : task_c_lamp2;
+task_c1_2 : task_c_lamp1;
+task_onn : task_on_lamp;
+task_c2_3 : task_c_tv2;
+task_c1_3 : task_c_tv1;
+task_onn_1 : task_on_tv;
+task_precense_1 : task_precense;
+task_c_door_1 : task_c_door;
+task_push : task_push_door;
+task_c_window_1 : task_c_window;
+task_push_1 : task_push_window;
+task_ck_9_2_0 : task_ck_9_2;
+task_ck_9_2_1 : task_ck_9_2;
+task_v_74 : (not task_confort_1);
+task_v_75_2 : ((-1 when task_eco_1) default 1);
+task_v_75_1 : ((1 when task_eco_1) default 1);
+task_v_76 : ((1 when task_eco_1) default task_pnr_8);
+task_s_13_St_16_CONFORT_2 : ((-1 when task_v_74) default task_v_75_2);
+task_s_13_St_16_CONFORT_1 : ((-1 when task_v_74) default task_v_75_1);
+task_r_8_St_16_CONFORT : ((1 when task_v_74) default task_v_76);
+task_v_77 : (not task_eco_1);
+task_v_78_2 : ((1 when task_confort_1) default -1);
+task_v_78_1 : ((1 when task_confort_1) default 1);
+task_v_79 : ((1 when task_confort_1) default task_pnr_8);
+task_s_13_St_16_ECO_2 : ((-1 when task_v_77) default task_v_78_2);
+task_v_422 : ((task_s_13_St_16_CONFORT_2 when task_ck_9_2_1)
+  default task_s_13_St_16_ECO_2);
+task_s_13_St_16_ECO_1 : ((-1 when task_v_77) default task_v_78_1);
+task_v_421 : ((task_s_13_St_16_CONFORT_1 when task_ck_9_2_1)
+  default task_s_13_St_16_ECO_1);
+task_r_8_St_16_ECO : ((1 when task_v_77) default task_v_79);
+task_v_425 : ((task_r_8_St_16_CONFORT when task_ck_9_2_1)
+  default task_r_8_St_16_ECO);
+task_s_13_St_16_CONFORT_2_0 : task_s_13_St_16_CONFORT_2;
+task_s_13_St_16_CONFORT_2_1 : task_s_13_St_16_CONFORT_2;
+task_s_13_St_16_ECO_2_0 : task_s_13_St_16_ECO_2;
+task_s_13_St_16_ECO_2_1 : task_s_13_St_16_ECO_2;
+task_v_75_2_0 : task_v_75_2;
+task_v_75_2_1 : task_v_75_2;
+task_v_78_2_0 : task_v_78_2;
+task_v_78_2_1 : task_v_78_2;
+task_v_80_2 : ((1 when task_confort_1) default -1);
+task_v_80_1 : ((1 when task_confort_1) default -1);
+task_v_81 : ((1 when task_confort_1) default task_pnr_8);
+task_s_13_St_16_MS_2 : ((-1 when task_eco_1) default task_v_80_2);
+task_v_424 : ((1 when task_ck_9_2_0) default task_s_13_St_16_MS_2);
+task_s_13_St_16_MS_1 : ((1 when task_eco_1) default task_v_80_1);
+task_v_423 : ((1 when task_ck_9_2_0) default task_s_13_St_16_MS_1);
+task_r_8_St_16_MS : ((1 when task_eco_1) default task_v_81);
+task_v_426 : ((1 when task_ck_9_2_0) default task_r_8_St_16_MS);
+task_s_13_St_16_MS_2_0 : task_s_13_St_16_MS_2;
+task_s_13_St_16_MS_2_1 : task_s_13_St_16_MS_2;
+task_r_8 : ((task_v_425 when task_ck_9_1) default task_v_426);
+task_s_13_2 : ((task_v_422 when task_ck_9_1) default task_v_424);
+task_s_13_1 : ((task_v_421 when task_ck_9_1) default task_v_423);
+task_s_13_2_0 : task_s_13_2;
+task_s_13_2_1 : task_s_13_2;
+task_v_80_2_0 : task_v_80_2;
+task_v_80_2_1 : task_v_80_2;
+task_ck_10_2 : task_s_13_2;
+task_ck_10_1 : task_s_13_1;
+task_ck_10_2_0 : task_ck_10_2;
+task_ck_10_2_1 : task_ck_10_2;
+task_ns_8_St_16_CONFORT_2 : 1;
+task_ns_8_St_16_CONFORT_1 : 1;
+task_nr_8_St_16_CONFORT : -1;
+task_s_1_St_16_CONFORT_2 : 1;
+task_s_1_St_16_CONFORT_1 : 1;
+task_pl_1_St_16_CONFORT : a_const(7000);
+task_ns_8_St_16_ECO_2 : -1;
+task_v_414 : ((task_ns_8_St_16_CONFORT_2 when task_ck_10_2_1)
+  default task_ns_8_St_16_ECO_2);
+task_ns_8_St_16_ECO_1 : 1;
+task_v_413 : ((task_ns_8_St_16_CONFORT_1 when task_ck_10_2_1)
+  default task_ns_8_St_16_ECO_1);
+task_nr_8_St_16_ECO : -1;
+task_v_417 : ((task_nr_8_St_16_CONFORT when task_ck_10_2_1)
+  default task_nr_8_St_16_ECO);
+task_s_1_St_16_ECO_2 : -1;
+task_v_410 : ((task_s_1_St_16_CONFORT_2 when task_ck_10_2_1)
+  default task_s_1_St_16_ECO_2);
+task_s_1_St_16_ECO_1 : 1;
+task_v_409 : ((task_s_1_St_16_CONFORT_1 when task_ck_10_2_1)
+  default task_s_1_St_16_ECO_1);
+task_pl_1_St_16_ECO : a_const(5000);
+task_v_407 : a_part(task_ck_10_2_1, a_const(0), task_pl_1_St_16_CONFORT,
+                    task_pl_1_St_16_ECO);
+task_ns_8_St_16_CONFORT_2_0 : task_ns_8_St_16_CONFORT_2;
+task_ns_8_St_16_CONFORT_2_1 : task_ns_8_St_16_CONFORT_2;
+task_s_1_St_16_CONFORT_2_0 : task_s_1_St_16_CONFORT_2;
+task_s_1_St_16_CONFORT_2_1 : task_s_1_St_16_CONFORT_2;
+task_ns_8_St_16_ECO_2_0 : task_ns_8_St_16_ECO_2;
+task_ns_8_St_16_ECO_2_1 : task_ns_8_St_16_ECO_2;
+task_s_1_St_16_ECO_2_0 : task_s_1_St_16_ECO_2;
+task_s_1_St_16_ECO_2_1 : task_s_1_St_16_ECO_2;
+task_ns_8_St_16_MS_2 : -1;
+task_v_416 : ((1 when task_ck_10_2_0) default task_ns_8_St_16_MS_2);
+task_ns_8_St_16_MS_1 : -1;
+task_v_415 : ((1 when task_ck_10_2_0) default task_ns_8_St_16_MS_1);
+task_nr_8_St_16_MS : -1;
+task_v_418 : ((1 when task_ck_10_2_0) default task_nr_8_St_16_MS);
+task_s_1_St_16_MS_2 : -1;
+task_v_412 : ((1 when task_ck_10_2_0) default task_s_1_St_16_MS_2);
+task_s_1_St_16_MS_1 : -1;
+task_v_411 : ((1 when task_ck_10_2_0) default task_s_1_St_16_MS_1);
+task_pl_1_St_16_MS : a_const(3000);
+task_v_408 : a_part(task_ck_10_2_0, a_const(0), a_const(0),
+                    task_pl_1_St_16_MS);
+task_ns_8_St_16_MS_2_0 : task_ns_8_St_16_MS_2;
+task_ns_8_St_16_MS_2_1 : task_ns_8_St_16_MS_2;
+task_s_1_St_16_MS_2_0 : task_s_1_St_16_MS_2;
+task_s_1_St_16_MS_2_1 : task_s_1_St_16_MS_2;
+task_nr_8 : ((task_v_417 when task_ck_10_1) default task_v_418);
+task_ns_8_2 : ((task_v_414 when task_ck_10_1) default task_v_416);
+task_ns_8_1 : ((task_v_413 when task_ck_10_1) default task_v_415);
+task_s_1_2 : ((task_v_410 when task_ck_10_1) default task_v_412);
+task_s_1_1 : ((task_v_409 when task_ck_10_1) default task_v_411);
+task_pl_1 : a_part(task_ck_10_1, a_const(0), task_v_407, task_v_408);
+task_ns_8_2_0 : task_ns_8_2;
+task_ns_8_2_1 : task_ns_8_2;
+task_s_1_2_0 : task_s_1_2;
+task_s_1_2_1 : task_s_1_2;
+task_pl : task_pl_1;
+task_sp_2 : task_s_1_2;
+task_sp_1 : task_s_1_1;
+task_sp_2_0 : task_sp_2;
+task_sp_2_1 : task_sp_2;
+task_ck_11_2_0 : task_ck_11_2;
+task_ck_11_2_1 : task_ck_11_2;
+task_v_82 : (not task_c1_1);
+task_v_83 : (task_down1_1 and task_v_82);
+task_v_84 : (not task_c2_1);
+task_v_85 : (task_down2_1 and task_v_84);
+task_v_86_2 : ((-1 when task_v_85) default 1);
+task_v_86_1 : ((1 when task_v_85) default -1);
+task_v_87 : ((1 when task_v_85) default task_pnr_7);
+task_s_12_St_15_HIGHT_2 : ((1 when task_v_83) default task_v_86_2);
+task_s_12_St_15_HIGHT_1 : ((1 when task_v_83) default task_v_86_1);
+task_r_7_St_15_HIGHT : ((1 when task_v_83) default task_v_87);
+task_v_101 : (not task_c1_1);
+task_v_102 : (task_up1_1 or task_v_101);
+task_s_12_St_15_OFF_2 : ((-1 when task_v_102) default -1);
+task_v_404 : ((task_s_12_St_15_HIGHT_2 when task_ck_11_2_0)
+  default task_s_12_St_15_OFF_2);
+task_s_12_St_15_OFF_1 : ((1 when task_v_102) default -1);
+task_v_403 : ((task_s_12_St_15_HIGHT_1 when task_ck_11_2_0)
+  default task_s_12_St_15_OFF_1);
+task_r_7_St_15_OFF : ((1 when task_v_102) default task_pnr_7);
+task_v_406 : ((task_r_7_St_15_HIGHT when task_ck_11_2_0)
+  default task_r_7_St_15_OFF);
+task_s_12_St_15_HIGHT_2_0 : task_s_12_St_15_HIGHT_2;
+task_s_12_St_15_HIGHT_2_1 : task_s_12_St_15_HIGHT_2;
+task_s_12_St_15_OFF_2_0 : task_s_12_St_15_OFF_2;
+task_s_12_St_15_OFF_2_1 : task_s_12_St_15_OFF_2;
+task_v_86_2_0 : task_v_86_2;
+task_v_86_2_1 : task_v_86_2;
+task_v_88 : (not task_c1_1);
+task_v_89 : (task_down1_1 or task_v_88);
+task_v_90 : (task_up2_1 and task_c2_1);
+task_v_91_2 : ((1 when task_v_90) default 1);
+task_v_91_1 : ((-1 when task_v_90) default 1);
+task_v_92 : ((1 when task_v_90) default task_pnr_7);
+task_s_12_St_15_ECO_2 : ((-1 when task_v_89) default task_v_91_2);
+task_s_12_St_15_ECO_1 : ((1 when task_v_89) default task_v_91_1);
+task_r_7_St_15_ECO : ((1 when task_v_89) default task_v_92);
+task_v_93 : (task_up1_1 and task_c1_1);
+task_v_94 : (not task_c1_1);
+task_v_95 : (task_down1_1 or task_v_94);
+task_v_96 : (task_up2_1 and task_c2_1);
+task_v_97_2 : ((1 when task_v_96) default -1);
+task_v_97_1 : ((-1 when task_v_96) default 1);
+task_v_98 : ((1 when task_v_96) default task_pnr_7);
+task_v_99_2 : ((-1 when task_v_95) default task_v_97_2);
+task_v_99_1 : ((-1 when task_v_95) default task_v_97_1);
+task_v_100 : ((1 when task_v_95) default task_v_98);
+task_s_12_St_15_FROST_2 : ((1 when task_v_93) default task_v_99_2);
+task_v_402 : ((task_s_12_St_15_ECO_2 when task_ck_11_2_1)
+  default task_s_12_St_15_FROST_2);
+task_s_12_St_15_FROST_1 : ((1 when task_v_93) default task_v_99_1);
+task_v_401 : ((task_s_12_St_15_ECO_1 when task_ck_11_2_1)
+  default task_s_12_St_15_FROST_1);
+task_r_7_St_15_FROST : ((1 when task_v_93) default task_v_100);
+task_v_405 : ((task_r_7_St_15_ECO when task_ck_11_2_1)
+  default task_r_7_St_15_FROST);
+task_s_12_St_15_ECO_2_0 : task_s_12_St_15_ECO_2;
+task_s_12_St_15_ECO_2_1 : task_s_12_St_15_ECO_2;
+task_s_12_St_15_FROST_2_0 : task_s_12_St_15_FROST_2;
+task_s_12_St_15_FROST_2_1 : task_s_12_St_15_FROST_2;
+task_r_7 : ((task_v_405 when task_ck_11_1) default task_v_406);
+task_s_12_2 : ((task_v_402 when task_ck_11_1) default task_v_404);
+task_s_12_1 : ((task_v_401 when task_ck_11_1) default task_v_403);
+task_s_12_2_0 : task_s_12_2;
+task_s_12_2_1 : task_s_12_2;
+task_v_91_2_0 : task_v_91_2;
+task_v_91_2_1 : task_v_91_2;
+task_v_99_2_0 : task_v_99_2;
+task_v_99_2_1 : task_v_99_2;
+task_v_97_2_0 : task_v_97_2;
+task_v_97_2_1 : task_v_97_2;
+task_ck_12_2 : task_s_12_2;
+task_ck_12_1 : task_s_12_1;
+task_ck_12_2_0 : task_ck_12_2;
+task_ck_12_2_1 : task_ck_12_2;
+task_ns_7_St_15_HIGHT_2 : 1;
+task_ns_7_St_15_HIGHT_1 : -1;
+task_nr_7_St_15_HIGHT : -1;
+task_ss_1_St_15_HIGHT : a_const(3);
+task_power_St_15_HIGHT : a_const(2000);
+task_ns_7_St_15_OFF_2 : -1;
+task_v_396 : ((task_ns_7_St_15_HIGHT_2 when task_ck_12_2_0)
+  default task_ns_7_St_15_OFF_2);
+task_ns_7_St_15_OFF_1 : -1;
+task_v_395 : ((task_ns_7_St_15_HIGHT_1 when task_ck_12_2_0)
+  default task_ns_7_St_15_OFF_1);
+task_nr_7_St_15_OFF : -1;
+task_v_398 : ((task_nr_7_St_15_HIGHT when task_ck_12_2_0)
+  default task_nr_7_St_15_OFF);
+task_ss_1_St_15_OFF : a_const(0);
+task_v_392 : a_part(task_ck_12_2_0, a_const(0), task_ss_1_St_15_HIGHT,
+                    task_ss_1_St_15_OFF);
+task_power_St_15_OFF : a_const(0);
+task_v_390 : a_part(task_ck_12_2_0, a_const(0), task_power_St_15_HIGHT,
+                    task_power_St_15_OFF);
+task_ns_7_St_15_HIGHT_2_0 : task_ns_7_St_15_HIGHT_2;
+task_ns_7_St_15_HIGHT_2_1 : task_ns_7_St_15_HIGHT_2;
+task_ns_7_St_15_OFF_2_0 : task_ns_7_St_15_OFF_2;
+task_ns_7_St_15_OFF_2_1 : task_ns_7_St_15_OFF_2;
+task_ns_7_St_15_ECO_2 : 1;
+task_ns_7_St_15_ECO_1 : 1;
+task_nr_7_St_15_ECO : -1;
+task_ss_1_St_15_ECO : a_const(2);
+task_power_St_15_ECO : a_const(1500);
+task_ns_7_St_15_FROST_2 : -1;
+task_v_394 : ((task_ns_7_St_15_ECO_2 when task_ck_12_2_1)
+  default task_ns_7_St_15_FROST_2);
+task_ns_7_St_15_FROST_1 : 1;
+task_v_393 : ((task_ns_7_St_15_ECO_1 when task_ck_12_2_1)
+  default task_ns_7_St_15_FROST_1);
+task_nr_7_St_15_FROST : -1;
+task_v_397 : ((task_nr_7_St_15_ECO when task_ck_12_2_1)
+  default task_nr_7_St_15_FROST);
+task_ss_1_St_15_FROST : a_const(1);
+task_v_391 : a_part(task_ck_12_2_1, a_const(0), task_ss_1_St_15_ECO,
+                    task_ss_1_St_15_FROST);
+task_power_St_15_FROST : a_const(300);
+task_v_389 : a_part(task_ck_12_2_1, a_const(0), task_power_St_15_ECO,
+                    task_power_St_15_FROST);
+task_ns_7_St_15_ECO_2_0 : task_ns_7_St_15_ECO_2;
+task_ns_7_St_15_ECO_2_1 : task_ns_7_St_15_ECO_2;
+task_ns_7_St_15_FROST_2_0 : task_ns_7_St_15_FROST_2;
+task_ns_7_St_15_FROST_2_1 : task_ns_7_St_15_FROST_2;
+task_nr_7 : ((task_v_397 when task_ck_12_1) default task_v_398);
+task_ns_7_2 : ((task_v_394 when task_ck_12_1) default task_v_396);
+task_ns_7_1 : ((task_v_393 when task_ck_12_1) default task_v_395);
+task_ss_1 : a_part(task_ck_12_1, a_const(0), task_v_391, task_v_392);
+task_power : a_part(task_ck_12_1, a_const(0), task_v_389, task_v_390);
+task_ns_7_2_0 : task_ns_7_2;
+task_ns_7_2_1 : task_ns_7_2;
+task_p1 : task_power;
+task_ss : task_ss_1;
+task_ck_13_2_0 : task_ck_13_2;
+task_ck_13_2_1 : task_ck_13_2;
+task_ck_13_3_0_0 : task_ck_13_3;
+task_ck_13_3_0_1 : task_ck_13_3;
+task_ck_13_3_1_0 : task_ck_13_3;
+task_ck_13_3_1_1 : task_ck_13_3;
+task_s_11_St_14_STANDBY_3 : ((-1 when task_c) default 1);
+task_s_11_St_14_STANDBY_2 : ((1 when task_c) default 1);
+task_s_11_St_14_STANDBY_1 : ((-1 when task_c) default -1);
+task_r_6_St_14_STANDBY : ((1 when task_c) default task_pnr_6);
+task_s_11_St_14_WASHING_3 : ((-1 when task_e_1) default -1);
+task_v_373 : ((task_s_11_St_14_STANDBY_3 when task_ck_13_3_0_1)
+  default task_s_11_St_14_WASHING_3);
+task_s_11_St_14_WASHING_2 : ((1 when task_e_1) default 1);
+task_v_372 : ((task_s_11_St_14_STANDBY_2 when task_ck_13_3_0_1)
+  default task_s_11_St_14_WASHING_2);
+task_s_11_St_14_WASHING_1 : ((1 when task_e_1) default -1);
+task_v_371 : ((task_s_11_St_14_STANDBY_1 when task_ck_13_3_0_1)
+  default task_s_11_St_14_WASHING_1);
+task_r_6_St_14_WASHING : ((1 when task_e_1) default task_pnr_6);
+task_v_386 : ((task_r_6_St_14_STANDBY when task_ck_13_3_0_1)
+  default task_r_6_St_14_WASHING);
+task_s_11_St_14_STANDBY_2_0 : task_s_11_St_14_STANDBY_2;
+task_s_11_St_14_STANDBY_2_1 : task_s_11_St_14_STANDBY_2;
+task_s_11_St_14_STANDBY_3_0_0 : task_s_11_St_14_STANDBY_3;
+task_s_11_St_14_STANDBY_3_0_1 : task_s_11_St_14_STANDBY_3;
+task_s_11_St_14_STANDBY_3_1_0 : task_s_11_St_14_STANDBY_3;
+task_s_11_St_14_STANDBY_3_1_1 : task_s_11_St_14_STANDBY_3;
+task_s_11_St_14_WASHING_2_0 : task_s_11_St_14_WASHING_2;
+task_s_11_St_14_WASHING_2_1 : task_s_11_St_14_WASHING_2;
+task_s_11_St_14_WASHING_3_0_0 : task_s_11_St_14_WASHING_3;
+task_s_11_St_14_WASHING_3_0_1 : task_s_11_St_14_WASHING_3;
+task_s_11_St_14_WASHING_3_1_0 : task_s_11_St_14_WASHING_3;
+task_s_11_St_14_WASHING_3_1_1 : task_s_11_St_14_WASHING_3;
+task_s_11_St_14_SPIN_3 : ((1 when task_e_1) default -1);
+task_v_370 : ((1 when task_ck_13_3_1_0) default task_s_11_St_14_SPIN_3);
+task_s_11_St_14_SPIN_2 : ((1 when task_e_1) default -1);
+task_v_369 : ((1 when task_ck_13_3_1_0) default task_s_11_St_14_SPIN_2);
+task_s_11_St_14_SPIN_1 : ((1 when task_e_1) default 1);
+task_v_368 : ((1 when task_ck_13_3_1_0) default task_s_11_St_14_SPIN_1);
+task_r_6_St_14_SPIN : ((1 when task_e_1) default task_pnr_6);
+task_v_384 : ((1 when task_ck_13_3_1_0) default task_r_6_St_14_SPIN);
+task_s_11_St_14_SPIN_2_0 : task_s_11_St_14_SPIN_2;
+task_s_11_St_14_SPIN_2_1 : task_s_11_St_14_SPIN_2;
+task_s_11_St_14_SPIN_3_0_0 : task_s_11_St_14_SPIN_3;
+task_s_11_St_14_SPIN_3_0_1 : task_s_11_St_14_SPIN_3;
+task_s_11_St_14_SPIN_3_1_0 : task_s_11_St_14_SPIN_3;
+task_s_11_St_14_SPIN_3_1_1 : task_s_11_St_14_SPIN_3;
+task_s_11_St_14_RINSE_3 : ((-1 when task_e_1) default -1);
+task_s_11_St_14_RINSE_2 : ((-1 when task_e_1) default 1);
+task_s_11_St_14_RINSE_1 : ((1 when task_e_1) default 1);
+task_r_6_St_14_RINSE : ((1 when task_e_1) default task_pnr_6);
+task_s_11_St_14_OFF_3 : ((-1 when task_s_2) default 1);
+task_v_367 : ((task_s_11_St_14_OFF_3 when task_ck_13_3_1_1)
+  default task_s_11_St_14_RINSE_3);
+task_s_11_St_14_OFF_2 : ((-1 when task_s_2) default 1);
+task_v_366 : ((task_s_11_St_14_OFF_2 when task_ck_13_3_1_1)
+  default task_s_11_St_14_RINSE_2);
+task_s_11_St_14_OFF_1 : ((-1 when task_s_2) default 1);
+task_v_365 : ((task_s_11_St_14_OFF_1 when task_ck_13_3_1_1)
+  default task_s_11_St_14_RINSE_1);
+task_r_6_St_14_OFF : ((1 when task_s_2) default task_pnr_6);
+task_v_383 : ((task_r_6_St_14_OFF when task_ck_13_3_1_1)
+  default task_r_6_St_14_RINSE);
+task_s_11_St_14_RINSE_2_0 : task_s_11_St_14_RINSE_2;
+task_s_11_St_14_RINSE_2_1 : task_s_11_St_14_RINSE_2;
+task_s_11_St_14_RINSE_3_0_0 : task_s_11_St_14_RINSE_3;
+task_s_11_St_14_RINSE_3_0_1 : task_s_11_St_14_RINSE_3;
+task_s_11_St_14_RINSE_3_1_0 : task_s_11_St_14_RINSE_3;
+task_s_11_St_14_RINSE_3_1_1 : task_s_11_St_14_RINSE_3;
+task_s_11_St_14_OFF_2_0 : task_s_11_St_14_OFF_2;
+task_s_11_St_14_OFF_2_1 : task_s_11_St_14_OFF_2;
+task_s_11_St_14_OFF_3_0_0 : task_s_11_St_14_OFF_3;
+task_s_11_St_14_OFF_3_0_1 : task_s_11_St_14_OFF_3;
+task_s_11_St_14_OFF_3_1_0 : task_s_11_St_14_OFF_3;
+task_s_11_St_14_OFF_3_1_1 : task_s_11_St_14_OFF_3;
+task_v_385 : ((task_v_383 when task_ck_13_2_1) default task_v_384);
+task_v_379 : ((task_v_367 when task_ck_13_2_1) default task_v_370);
+task_v_378 : ((task_v_366 when task_ck_13_2_1) default task_v_369);
+task_v_377 : ((task_v_365 when task_ck_13_2_1) default task_v_368);
+task_v_103 : (task_e_1 and task_c);
+task_v_104 : (not task_c);
+task_v_105 : (task_e_1 and task_v_104);
+task_v_106_3 : ((1 when task_v_105) default -1);
+task_v_106_2 : ((1 when task_v_105) default -1);
+task_v_106_1 : ((-1 when task_v_105) default -1);
+task_v_107 : ((1 when task_v_105) default task_pnr_6);
+task_s_11_St_14_WF_3 : ((-1 when task_v_103) default task_v_106_3);
+task_v_376 : ((1 when task_ck_13_3_0_0) default task_s_11_St_14_WF_3);
+task_s_11_St_14_WF_2 : ((1 when task_v_103) default task_v_106_2);
+task_v_375 : ((1 when task_ck_13_3_0_0) default task_s_11_St_14_WF_2);
+task_s_11_St_14_WF_1 : ((-1 when task_v_103) default task_v_106_1);
+task_v_374 : ((1 when task_ck_13_3_0_0) default task_s_11_St_14_WF_1);
+task_r_6_St_14_WF : ((1 when task_v_103) default task_v_107);
+task_v_387 : ((1 when task_ck_13_3_0_0) default task_r_6_St_14_WF);
+task_s_11_St_14_WF_2_0 : task_s_11_St_14_WF_2;
+task_s_11_St_14_WF_2_1 : task_s_11_St_14_WF_2;
+task_s_11_St_14_WF_3_0_0 : task_s_11_St_14_WF_3;
+task_s_11_St_14_WF_3_0_1 : task_s_11_St_14_WF_3;
+task_s_11_St_14_WF_3_1_0 : task_s_11_St_14_WF_3;
+task_s_11_St_14_WF_3_1_1 : task_s_11_St_14_WF_3;
+task_v_388 : ((task_v_386 when task_ck_13_2_0) default task_v_387);
+task_v_382 : ((task_v_373 when task_ck_13_2_0) default task_v_376);
+task_v_381 : ((task_v_372 when task_ck_13_2_0) default task_v_375);
+task_v_380 : ((task_v_371 when task_ck_13_2_0) default task_v_374);
+task_r_6 : ((task_v_385 when task_ck_13_1) default task_v_388);
+task_s_11_3 : ((task_v_379 when task_ck_13_1) default task_v_382);
+task_s_11_2 : ((task_v_378 when task_ck_13_1) default task_v_381);
+task_s_11_1 : ((task_v_377 when task_ck_13_1) default task_v_380);
+task_s_11_2_0 : task_s_11_2;
+task_s_11_2_1 : task_s_11_2;
+task_s_11_3_0_0 : task_s_11_3;
+task_s_11_3_0_1 : task_s_11_3;
+task_s_11_3_1_0 : task_s_11_3;
+task_s_11_3_1_1 : task_s_11_3;
+task_v_106_2_0 : task_v_106_2;
+task_v_106_2_1 : task_v_106_2;
+task_v_106_3_0_0 : task_v_106_3;
+task_v_106_3_0_1 : task_v_106_3;
+task_v_106_3_1_0 : task_v_106_3;
+task_v_106_3_1_1 : task_v_106_3;
+task_ck_14_3 : task_s_11_3;
+task_ck_14_2 : task_s_11_2;
+task_ck_14_1 : task_s_11_1;
+task_ck_14_2_0 : task_ck_14_2;
+task_ck_14_2_1 : task_ck_14_2;
+task_ck_14_3_0_0 : task_ck_14_3;
+task_ck_14_3_0_1 : task_ck_14_3;
+task_ck_14_3_1_0 : task_ck_14_3;
+task_ck_14_3_1_1 : task_ck_14_3;
+task_ns_6_St_14_STANDBY_3 : 1;
+task_ns_6_St_14_STANDBY_2 : 1;
+task_ns_6_St_14_STANDBY_1 : -1;
+task_nr_6_St_14_STANDBY : -1;
+task_power_1_St_14_STANDBY : a_const(0);
+task_ns_6_St_14_WASHING_3 : -1;
+task_v_346 : ((task_ns_6_St_14_STANDBY_3 when task_ck_14_3_0_1)
+  default task_ns_6_St_14_WASHING_3);
+task_ns_6_St_14_WASHING_2 : 1;
+task_v_345 : ((task_ns_6_St_14_STANDBY_2 when task_ck_14_3_0_1)
+  default task_ns_6_St_14_WASHING_2);
+task_ns_6_St_14_WASHING_1 : -1;
+task_v_344 : ((task_ns_6_St_14_STANDBY_1 when task_ck_14_3_0_1)
+  default task_ns_6_St_14_WASHING_1);
+task_nr_6_St_14_WASHING : -1;
+task_v_359 : ((task_nr_6_St_14_STANDBY when task_ck_14_3_0_1)
+  default task_nr_6_St_14_WASHING);
+task_power_1_St_14_WASHING : a_const(250);
+task_v_335 : a_part(task_ck_14_3_0_1, a_const(0), task_power_1_St_14_STANDBY,
+                    task_power_1_St_14_WASHING);
+task_ns_6_St_14_STANDBY_2_0 : task_ns_6_St_14_STANDBY_2;
+task_ns_6_St_14_STANDBY_2_1 : task_ns_6_St_14_STANDBY_2;
+task_ns_6_St_14_STANDBY_3_0_0 : task_ns_6_St_14_STANDBY_3;
+task_ns_6_St_14_STANDBY_3_0_1 : task_ns_6_St_14_STANDBY_3;
+task_ns_6_St_14_STANDBY_3_1_0 : task_ns_6_St_14_STANDBY_3;
+task_ns_6_St_14_STANDBY_3_1_1 : task_ns_6_St_14_STANDBY_3;
+task_ns_6_St_14_WASHING_2_0 : task_ns_6_St_14_WASHING_2;
+task_ns_6_St_14_WASHING_2_1 : task_ns_6_St_14_WASHING_2;
+task_ns_6_St_14_WASHING_3_0_0 : task_ns_6_St_14_WASHING_3;
+task_ns_6_St_14_WASHING_3_0_1 : task_ns_6_St_14_WASHING_3;
+task_ns_6_St_14_WASHING_3_1_0 : task_ns_6_St_14_WASHING_3;
+task_ns_6_St_14_WASHING_3_1_1 : task_ns_6_St_14_WASHING_3;
+task_ns_6_St_14_SPIN_3 : -1;
+task_v_343 : ((1 when task_ck_14_3_1_0) default task_ns_6_St_14_SPIN_3);
+task_ns_6_St_14_SPIN_2 : -1;
+task_v_342 : ((1 when task_ck_14_3_1_0) default task_ns_6_St_14_SPIN_2);
+task_ns_6_St_14_SPIN_1 : 1;
+task_v_341 : ((1 when task_ck_14_3_1_0) default task_ns_6_St_14_SPIN_1);
+task_nr_6_St_14_SPIN : -1;
+task_v_357 : ((1 when task_ck_14_3_1_0) default task_nr_6_St_14_SPIN);
+task_power_1_St_14_SPIN : a_const(800);
+task_v_333 : a_part(task_ck_14_3_1_0, a_const(0), a_const(0),
+                    task_power_1_St_14_SPIN);
+task_ns_6_St_14_SPIN_2_0 : task_ns_6_St_14_SPIN_2;
+task_ns_6_St_14_SPIN_2_1 : task_ns_6_St_14_SPIN_2;
+task_ns_6_St_14_SPIN_3_0_0 : task_ns_6_St_14_SPIN_3;
+task_ns_6_St_14_SPIN_3_0_1 : task_ns_6_St_14_SPIN_3;
+task_ns_6_St_14_SPIN_3_1_0 : task_ns_6_St_14_SPIN_3;
+task_ns_6_St_14_SPIN_3_1_1 : task_ns_6_St_14_SPIN_3;
+task_ns_6_St_14_RINSE_3 : -1;
+task_ns_6_St_14_RINSE_2 : 1;
+task_ns_6_St_14_RINSE_1 : 1;
+task_nr_6_St_14_RINSE : -1;
+task_power_1_St_14_RINSE : a_const(200);
+task_ns_6_St_14_OFF_3 : 1;
+task_v_340 : ((task_ns_6_St_14_OFF_3 when task_ck_14_3_1_1)
+  default task_ns_6_St_14_RINSE_3);
+task_ns_6_St_14_OFF_2 : 1;
+task_v_339 : ((task_ns_6_St_14_OFF_2 when task_ck_14_3_1_1)
+  default task_ns_6_St_14_RINSE_2);
+task_ns_6_St_14_OFF_1 : 1;
+task_v_338 : ((task_ns_6_St_14_OFF_1 when task_ck_14_3_1_1)
+  default task_ns_6_St_14_RINSE_1);
+task_nr_6_St_14_OFF : -1;
+task_v_356 : ((task_nr_6_St_14_OFF when task_ck_14_3_1_1)
+  default task_nr_6_St_14_RINSE);
+task_power_1_St_14_OFF : a_const(0);
+task_v_332 : a_part(task_ck_14_3_1_1, a_const(0), task_power_1_St_14_OFF,
+                    task_power_1_St_14_RINSE);
+task_ns_6_St_14_RINSE_2_0 : task_ns_6_St_14_RINSE_2;
+task_ns_6_St_14_RINSE_2_1 : task_ns_6_St_14_RINSE_2;
+task_ns_6_St_14_RINSE_3_0_0 : task_ns_6_St_14_RINSE_3;
+task_ns_6_St_14_RINSE_3_0_1 : task_ns_6_St_14_RINSE_3;
+task_ns_6_St_14_RINSE_3_1_0 : task_ns_6_St_14_RINSE_3;
+task_ns_6_St_14_RINSE_3_1_1 : task_ns_6_St_14_RINSE_3;
+task_ns_6_St_14_OFF_2_0 : task_ns_6_St_14_OFF_2;
+task_ns_6_St_14_OFF_2_1 : task_ns_6_St_14_OFF_2;
+task_ns_6_St_14_OFF_3_0_0 : task_ns_6_St_14_OFF_3;
+task_ns_6_St_14_OFF_3_0_1 : task_ns_6_St_14_OFF_3;
+task_ns_6_St_14_OFF_3_1_0 : task_ns_6_St_14_OFF_3;
+task_ns_6_St_14_OFF_3_1_1 : task_ns_6_St_14_OFF_3;
+task_v_358 : ((task_v_356 when task_ck_14_2_1) default task_v_357);
+task_v_352 : ((task_v_340 when task_ck_14_2_1) default task_v_343);
+task_v_351 : ((task_v_339 when task_ck_14_2_1) default task_v_342);
+task_v_350 : ((task_v_338 when task_ck_14_2_1) default task_v_341);
+task_v_334 : a_part(task_ck_14_2_1, a_const(0), task_v_332, task_v_333);
+task_ns_6_St_14_WF_3 : -1;
+task_v_349 : ((1 when task_ck_14_3_0_0) default task_ns_6_St_14_WF_3);
+task_ns_6_St_14_WF_2 : -1;
+task_v_348 : ((1 when task_ck_14_3_0_0) default task_ns_6_St_14_WF_2);
+task_ns_6_St_14_WF_1 : -1;
+task_v_347 : ((1 when task_ck_14_3_0_0) default task_ns_6_St_14_WF_1);
+task_nr_6_St_14_WF : -1;
+task_v_360 : ((1 when task_ck_14_3_0_0) default task_nr_6_St_14_WF);
+task_power_1_St_14_WF : a_const(15);
+task_v_336 : a_part(task_ck_14_3_0_0, a_const(0), a_const(0),
+                    task_power_1_St_14_WF);
+task_ns_6_St_14_WF_2_0 : task_ns_6_St_14_WF_2;
+task_ns_6_St_14_WF_2_1 : task_ns_6_St_14_WF_2;
+task_ns_6_St_14_WF_3_0_0 : task_ns_6_St_14_WF_3;
+task_ns_6_St_14_WF_3_0_1 : task_ns_6_St_14_WF_3;
+task_ns_6_St_14_WF_3_1_0 : task_ns_6_St_14_WF_3;
+task_ns_6_St_14_WF_3_1_1 : task_ns_6_St_14_WF_3;
+task_v_361 : ((task_v_359 when task_ck_14_2_0) default task_v_360);
+task_v_355 : ((task_v_346 when task_ck_14_2_0) default task_v_349);
+task_v_354 : ((task_v_345 when task_ck_14_2_0) default task_v_348);
+task_v_353 : ((task_v_344 when task_ck_14_2_0) default task_v_347);
+task_v_337 : a_part(task_ck_14_2_0, a_const(0), task_v_335, task_v_336);
+task_nr_6 : ((task_v_358 when task_ck_14_1) default task_v_361);
+task_ns_6_3 : ((task_v_352 when task_ck_14_1) default task_v_355);
+task_ns_6_2 : ((task_v_351 when task_ck_14_1) default task_v_354);
+task_ns_6_1 : ((task_v_350 when task_ck_14_1) default task_v_353);
+task_power_1 : a_part(task_ck_14_1, a_const(0), task_v_334, task_v_337);
+task_ns_6_2_0 : task_ns_6_2;
+task_ns_6_2_1 : task_ns_6_2;
+task_ns_6_3_0_0 : task_ns_6_3;
+task_ns_6_3_0_1 : task_ns_6_3;
+task_ns_6_3_1_0 : task_ns_6_3;
+task_ns_6_3_1_1 : task_ns_6_3;
+task_p2 : task_power_1;
+task_ck_15_2_0 : task_ck_15_2;
+task_ck_15_2_1 : task_ck_15_2;
+task_ck_15_3_0_0 : task_ck_15_3;
+task_ck_15_3_0_1 : task_ck_15_3;
+task_ck_15_3_1_0 : task_ck_15_3;
+task_ck_15_3_1_1 : task_ck_15_3;
+task_v_108_3 : ((-1 when task_finish_1) default 1);
+task_v_108_2 : ((-1 when task_finish_1) default -1);
+task_v_108_1 : ((1 when task_finish_1) default -1);
+task_v_109 : ((1 when task_finish_1) default task_pnr_5);
+task_s_10_St_13_REHEAT_3 : ((-1 when task_temp_ok_1) default task_v_108_3);
+task_s_10_St_13_REHEAT_2 : ((1 when task_temp_ok_1) default task_v_108_2);
+task_s_10_St_13_REHEAT_1 : ((1 when task_temp_ok_1) default task_v_108_1);
+task_r_5_St_13_REHEAT : ((1 when task_temp_ok_1) default task_v_109);
+task_s_10_St_13_STANDBY_3 : ((1 when task_c_1) default -1);
+task_v_320 : ((task_s_10_St_13_REHEAT_3 when task_ck_15_3_0_0)
+  default task_s_10_St_13_STANDBY_3);
+task_s_10_St_13_STANDBY_2 : ((1 when task_c_1) default -1);
+task_v_319 : ((task_s_10_St_13_REHEAT_2 when task_ck_15_3_0_0)
+  default task_s_10_St_13_STANDBY_2);
+task_s_10_St_13_STANDBY_1 : ((1 when task_c_1) default -1);
+task_v_318 : ((task_s_10_St_13_REHEAT_1 when task_ck_15_3_0_0)
+  default task_s_10_St_13_STANDBY_1);
+task_r_5_St_13_STANDBY : ((1 when task_c_1) default task_pnr_5);
+task_v_330 : ((task_r_5_St_13_REHEAT when task_ck_15_3_0_0)
+  default task_r_5_St_13_STANDBY);
+task_s_10_St_13_REHEAT_2_0 : task_s_10_St_13_REHEAT_2;
+task_s_10_St_13_REHEAT_2_1 : task_s_10_St_13_REHEAT_2;
+task_s_10_St_13_REHEAT_3_0_0 : task_s_10_St_13_REHEAT_3;
+task_s_10_St_13_REHEAT_3_0_1 : task_s_10_St_13_REHEAT_3;
+task_s_10_St_13_REHEAT_3_1_0 : task_s_10_St_13_REHEAT_3;
+task_s_10_St_13_REHEAT_3_1_1 : task_s_10_St_13_REHEAT_3;
+task_s_10_St_13_STANDBY_2_0 : task_s_10_St_13_STANDBY_2;
+task_s_10_St_13_STANDBY_2_1 : task_s_10_St_13_STANDBY_2;
+task_s_10_St_13_STANDBY_3_0_0 : task_s_10_St_13_STANDBY_3;
+task_s_10_St_13_STANDBY_3_0_1 : task_s_10_St_13_STANDBY_3;
+task_s_10_St_13_STANDBY_3_1_0 : task_s_10_St_13_STANDBY_3;
+task_s_10_St_13_STANDBY_3_1_1 : task_s_10_St_13_STANDBY_3;
+task_v_331 : ((1 when task_ck_15_2_0) default task_v_330);
+task_v_326 : ((1 when task_ck_15_2_0) default task_v_320);
+task_v_325 : ((1 when task_ck_15_2_0) default task_v_319);
+task_v_324 : ((1 when task_ck_15_2_0) default task_v_318);
+task_v_108_2_0 : task_v_108_2;
+task_v_108_2_1 : task_v_108_2;
+task_v_108_3_0_0 : task_v_108_3;
+task_v_108_3_0_1 : task_v_108_3;
+task_v_108_3_1_0 : task_v_108_3;
+task_v_108_3_1_1 : task_v_108_3;
+task_v_110 : (task_cold_1 and task_c_1);
+task_v_111_3 : ((-1 when task_finish_1) default -1);
+task_v_111_2 : ((-1 when task_finish_1) default 1);
+task_v_111_1 : ((1 when task_finish_1) default 1);
+task_v_112 : ((1 when task_finish_1) default task_pnr_5);
+task_s_10_St_13_MAINTAIN_3 : ((1 when task_v_110) default task_v_111_3);
+task_s_10_St_13_MAINTAIN_2 : ((-1 when task_v_110) default task_v_111_2);
+task_s_10_St_13_MAINTAIN_1 : ((-1 when task_v_110) default task_v_111_1);
+task_r_5_St_13_MAINTAIN : ((1 when task_v_110) default task_v_112);
+task_v_113_3 : ((-1 when task_temp_ok_1) default 1);
+task_v_113_2 : ((1 when task_temp_ok_1) default 1);
+task_v_113_1 : ((1 when task_temp_ok_1) default 1);
+task_v_114 : ((1 when task_temp_ok_1) default task_pnr_5);
+task_s_10_St_13_HEAT_3 : ((-1 when task_finish_1) default task_v_113_3);
+task_v_314 : ((task_s_10_St_13_HEAT_3 when task_ck_15_3_1_1)
+  default task_s_10_St_13_MAINTAIN_3);
+task_s_10_St_13_HEAT_2 : ((-1 when task_finish_1) default task_v_113_2);
+task_v_313 : ((task_s_10_St_13_HEAT_2 when task_ck_15_3_1_1)
+  default task_s_10_St_13_MAINTAIN_2);
+task_s_10_St_13_HEAT_1 : ((1 when task_finish_1) default task_v_113_1);
+task_v_312 : ((task_s_10_St_13_HEAT_1 when task_ck_15_3_1_1)
+  default task_s_10_St_13_MAINTAIN_1);
+task_r_5_St_13_HEAT : ((1 when task_finish_1) default task_v_114);
+task_v_327 : ((task_r_5_St_13_HEAT when task_ck_15_3_1_1)
+  default task_r_5_St_13_MAINTAIN);
+task_s_10_St_13_MAINTAIN_2_0 : task_s_10_St_13_MAINTAIN_2;
+task_s_10_St_13_MAINTAIN_2_1 : task_s_10_St_13_MAINTAIN_2;
+task_s_10_St_13_MAINTAIN_3_0_0 : task_s_10_St_13_MAINTAIN_3;
+task_s_10_St_13_MAINTAIN_3_0_1 : task_s_10_St_13_MAINTAIN_3;
+task_s_10_St_13_MAINTAIN_3_1_0 : task_s_10_St_13_MAINTAIN_3;
+task_s_10_St_13_MAINTAIN_3_1_1 : task_s_10_St_13_MAINTAIN_3;
+task_s_10_St_13_HEAT_2_0 : task_s_10_St_13_HEAT_2;
+task_s_10_St_13_HEAT_2_1 : task_s_10_St_13_HEAT_2;
+task_s_10_St_13_HEAT_3_0_0 : task_s_10_St_13_HEAT_3;
+task_s_10_St_13_HEAT_3_0_1 : task_s_10_St_13_HEAT_3;
+task_s_10_St_13_HEAT_3_1_0 : task_s_10_St_13_HEAT_3;
+task_s_10_St_13_HEAT_3_1_1 : task_s_10_St_13_HEAT_3;
+task_v_111_2_0 : task_v_111_2;
+task_v_111_2_1 : task_v_111_2;
+task_v_111_3_0_0 : task_v_111_3;
+task_v_111_3_0_1 : task_v_111_3;
+task_v_111_3_1_0 : task_v_111_3;
+task_v_111_3_1_1 : task_v_111_3;
+task_v_113_2_0 : task_v_113_2;
+task_v_113_2_1 : task_v_113_2;
+task_v_113_3_0_0 : task_v_113_3;
+task_v_113_3_0_1 : task_v_113_3;
+task_v_113_3_1_0 : task_v_113_3;
+task_v_113_3_1_1 : task_v_113_3;
+task_v_115 : (not task_c_1);
+task_v_116 : (task_start_1 and task_v_115);
+task_v_117 : (task_start_1 and task_c_1);
+task_v_118_3 : ((1 when task_v_117) default -1);
+task_v_118_2 : ((1 when task_v_117) default -1);
+task_v_118_1 : ((1 when task_v_117) default 1);
+task_v_119 : ((1 when task_v_117) default task_pnr_5);
+task_s_10_St_13_OFF_3 : ((-1 when task_v_116) default task_v_118_3);
+task_v_317 : ((1 when task_ck_15_3_1_0) default task_s_10_St_13_OFF_3);
+task_s_10_St_13_OFF_2 : ((-1 when task_v_116) default task_v_118_2);
+task_v_316 : ((1 when task_ck_15_3_1_0) default task_s_10_St_13_OFF_2);
+task_s_10_St_13_OFF_1 : ((-1 when task_v_116) default task_v_118_1);
+task_v_315 : ((1 when task_ck_15_3_1_0) default task_s_10_St_13_OFF_1);
+task_r_5_St_13_OFF : ((1 when task_v_116) default task_v_119);
+task_v_328 : ((1 when task_ck_15_3_1_0) default task_r_5_St_13_OFF);
+task_s_10_St_13_OFF_2_0 : task_s_10_St_13_OFF_2;
+task_s_10_St_13_OFF_2_1 : task_s_10_St_13_OFF_2;
+task_s_10_St_13_OFF_3_0_0 : task_s_10_St_13_OFF_3;
+task_s_10_St_13_OFF_3_0_1 : task_s_10_St_13_OFF_3;
+task_s_10_St_13_OFF_3_1_0 : task_s_10_St_13_OFF_3;
+task_s_10_St_13_OFF_3_1_1 : task_s_10_St_13_OFF_3;
+task_v_329 : ((task_v_327 when task_ck_15_2_1) default task_v_328);
+task_v_323 : ((task_v_314 when task_ck_15_2_1) default task_v_317);
+task_v_322 : ((task_v_313 when task_ck_15_2_1) default task_v_316);
+task_v_321 : ((task_v_312 when task_ck_15_2_1) default task_v_315);
+task_r_5 : ((task_v_329 when task_ck_15_1) default task_v_331);
+task_s_10_3 : ((task_v_323 when task_ck_15_1) default task_v_326);
+task_s_10_2 : ((task_v_322 when task_ck_15_1) default task_v_325);
+task_s_10_1 : ((task_v_321 when task_ck_15_1) default task_v_324);
+task_s_10_2_0 : task_s_10_2;
+task_s_10_2_1 : task_s_10_2;
+task_s_10_3_0_0 : task_s_10_3;
+task_s_10_3_0_1 : task_s_10_3;
+task_s_10_3_1_0 : task_s_10_3;
+task_s_10_3_1_1 : task_s_10_3;
+task_v_118_2_0 : task_v_118_2;
+task_v_118_2_1 : task_v_118_2;
+task_v_118_3_0_0 : task_v_118_3;
+task_v_118_3_0_1 : task_v_118_3;
+task_v_118_3_1_0 : task_v_118_3;
+task_v_118_3_1_1 : task_v_118_3;
+task_ck_16_3 : task_s_10_3;
+task_ck_16_2 : task_s_10_2;
+task_ck_16_1 : task_s_10_1;
+task_ck_16_2_0 : task_ck_16_2;
+task_ck_16_2_1 : task_ck_16_2;
+task_ck_16_3_0_0 : task_ck_16_3;
+task_ck_16_3_0_1 : task_ck_16_3;
+task_ck_16_3_1_0 : task_ck_16_3;
+task_ck_16_3_1_1 : task_ck_16_3;
+task_ns_5_St_13_REHEAT_3 : 1;
+task_ns_5_St_13_REHEAT_2 : -1;
+task_ns_5_St_13_REHEAT_1 : -1;
+task_nr_5_St_13_REHEAT : -1;
+task_power_2_St_13_REHEAT : a_const(1000);
+task_ns_5_St_13_STANDBY_3 : -1;
+task_v_297 : ((task_ns_5_St_13_REHEAT_3 when task_ck_16_3_0_0)
+  default task_ns_5_St_13_STANDBY_3);
+task_ns_5_St_13_STANDBY_2 : -1;
+task_v_296 : ((task_ns_5_St_13_REHEAT_2 when task_ck_16_3_0_0)
+  default task_ns_5_St_13_STANDBY_2);
+task_ns_5_St_13_STANDBY_1 : -1;
+task_v_295 : ((task_ns_5_St_13_REHEAT_1 when task_ck_16_3_0_0)
+  default task_ns_5_St_13_STANDBY_1);
+task_nr_5_St_13_STANDBY : -1;
+task_v_307 : ((task_nr_5_St_13_REHEAT when task_ck_16_3_0_0)
+  default task_nr_5_St_13_STANDBY);
+task_power_2_St_13_STANDBY : a_const(0);
+task_v_287 : a_part(task_ck_16_3_0_0, a_const(0), task_power_2_St_13_REHEAT,
+                    task_power_2_St_13_STANDBY);
+task_ns_5_St_13_REHEAT_2_0 : task_ns_5_St_13_REHEAT_2;
+task_ns_5_St_13_REHEAT_2_1 : task_ns_5_St_13_REHEAT_2;
+task_ns_5_St_13_REHEAT_3_0_0 : task_ns_5_St_13_REHEAT_3;
+task_ns_5_St_13_REHEAT_3_0_1 : task_ns_5_St_13_REHEAT_3;
+task_ns_5_St_13_REHEAT_3_1_0 : task_ns_5_St_13_REHEAT_3;
+task_ns_5_St_13_REHEAT_3_1_1 : task_ns_5_St_13_REHEAT_3;
+task_ns_5_St_13_STANDBY_2_0 : task_ns_5_St_13_STANDBY_2;
+task_ns_5_St_13_STANDBY_2_1 : task_ns_5_St_13_STANDBY_2;
+task_ns_5_St_13_STANDBY_3_0_0 : task_ns_5_St_13_STANDBY_3;
+task_ns_5_St_13_STANDBY_3_0_1 : task_ns_5_St_13_STANDBY_3;
+task_ns_5_St_13_STANDBY_3_1_0 : task_ns_5_St_13_STANDBY_3;
+task_ns_5_St_13_STANDBY_3_1_1 : task_ns_5_St_13_STANDBY_3;
+task_v_308 : ((1 when task_ck_16_2_0) default task_v_307);
+task_v_303 : ((1 when task_ck_16_2_0) default task_v_297);
+task_v_302 : ((1 when task_ck_16_2_0) default task_v_296);
+task_v_301 : ((1 when task_ck_16_2_0) default task_v_295);
+task_v_288 : a_part(task_ck_16_2_0, a_const(0), a_const(0), task_v_287);
+task_ns_5_St_13_MAINTAIN_3 : -1;
+task_ns_5_St_13_MAINTAIN_2 : 1;
+task_ns_5_St_13_MAINTAIN_1 : 1;
+task_nr_5_St_13_MAINTAIN : -1;
+task_power_2_St_13_MAINTAIN : a_const(300);
+task_ns_5_St_13_HEAT_3 : 1;
+task_v_291 : ((task_ns_5_St_13_HEAT_3 when task_ck_16_3_1_1)
+  default task_ns_5_St_13_MAINTAIN_3);
+task_ns_5_St_13_HEAT_2 : 1;
+task_v_290 : ((task_ns_5_St_13_HEAT_2 when task_ck_16_3_1_1)
+  default task_ns_5_St_13_MAINTAIN_2);
+task_ns_5_St_13_HEAT_1 : 1;
+task_v_289 : ((task_ns_5_St_13_HEAT_1 when task_ck_16_3_1_1)
+  default task_ns_5_St_13_MAINTAIN_1);
+task_nr_5_St_13_HEAT : -1;
+task_v_304 : ((task_nr_5_St_13_HEAT when task_ck_16_3_1_1)
+  default task_nr_5_St_13_MAINTAIN);
+task_power_2_St_13_HEAT : a_const(1500);
+task_v_284 : a_part(task_ck_16_3_1_1, a_const(0), task_power_2_St_13_HEAT,
+                    task_power_2_St_13_MAINTAIN);
+task_ns_5_St_13_MAINTAIN_2_0 : task_ns_5_St_13_MAINTAIN_2;
+task_ns_5_St_13_MAINTAIN_2_1 : task_ns_5_St_13_MAINTAIN_2;
+task_ns_5_St_13_MAINTAIN_3_0_0 : task_ns_5_St_13_MAINTAIN_3;
+task_ns_5_St_13_MAINTAIN_3_0_1 : task_ns_5_St_13_MAINTAIN_3;
+task_ns_5_St_13_MAINTAIN_3_1_0 : task_ns_5_St_13_MAINTAIN_3;
+task_ns_5_St_13_MAINTAIN_3_1_1 : task_ns_5_St_13_MAINTAIN_3;
+task_ns_5_St_13_HEAT_2_0 : task_ns_5_St_13_HEAT_2;
+task_ns_5_St_13_HEAT_2_1 : task_ns_5_St_13_HEAT_2;
+task_ns_5_St_13_HEAT_3_0_0 : task_ns_5_St_13_HEAT_3;
+task_ns_5_St_13_HEAT_3_0_1 : task_ns_5_St_13_HEAT_3;
+task_ns_5_St_13_HEAT_3_1_0 : task_ns_5_St_13_HEAT_3;
+task_ns_5_St_13_HEAT_3_1_1 : task_ns_5_St_13_HEAT_3;
+task_ns_5_St_13_OFF_3 : -1;
+task_v_294 : ((1 when task_ck_16_3_1_0) default task_ns_5_St_13_OFF_3);
+task_ns_5_St_13_OFF_2 : -1;
+task_v_293 : ((1 when task_ck_16_3_1_0) default task_ns_5_St_13_OFF_2);
+task_ns_5_St_13_OFF_1 : 1;
+task_v_292 : ((1 when task_ck_16_3_1_0) default task_ns_5_St_13_OFF_1);
+task_nr_5_St_13_OFF : -1;
+task_v_305 : ((1 when task_ck_16_3_1_0) default task_nr_5_St_13_OFF);
+task_power_2_St_13_OFF : a_const(0);
+task_v_285 : a_part(task_ck_16_3_1_0, a_const(0), a_const(0),
+                    task_power_2_St_13_OFF);
+task_ns_5_St_13_OFF_2_0 : task_ns_5_St_13_OFF_2;
+task_ns_5_St_13_OFF_2_1 : task_ns_5_St_13_OFF_2;
+task_ns_5_St_13_OFF_3_0_0 : task_ns_5_St_13_OFF_3;
+task_ns_5_St_13_OFF_3_0_1 : task_ns_5_St_13_OFF_3;
+task_ns_5_St_13_OFF_3_1_0 : task_ns_5_St_13_OFF_3;
+task_ns_5_St_13_OFF_3_1_1 : task_ns_5_St_13_OFF_3;
+task_v_306 : ((task_v_304 when task_ck_16_2_1) default task_v_305);
+task_v_300 : ((task_v_291 when task_ck_16_2_1) default task_v_294);
+task_v_299 : ((task_v_290 when task_ck_16_2_1) default task_v_293);
+task_v_298 : ((task_v_289 when task_ck_16_2_1) default task_v_292);
+task_v_286 : a_part(task_ck_16_2_1, a_const(0), task_v_284, task_v_285);
+task_nr_5 : ((task_v_306 when task_ck_16_1) default task_v_308);
+task_ns_5_3 : ((task_v_300 when task_ck_16_1) default task_v_303);
+task_ns_5_2 : ((task_v_299 when task_ck_16_1) default task_v_302);
+task_ns_5_1 : ((task_v_298 when task_ck_16_1) default task_v_301);
+task_power_2 : a_part(task_ck_16_1, a_const(0), task_v_286, task_v_288);
+task_ns_5_2_0 : task_ns_5_2;
+task_ns_5_2_1 : task_ns_5_2;
+task_ns_5_3_0_0 : task_ns_5_3;
+task_ns_5_3_0_1 : task_ns_5_3;
+task_ns_5_3_1_0 : task_ns_5_3;
+task_ns_5_3_1_1 : task_ns_5_3;
+task_p3 : task_power_2;
+task_v_120 : (task_onn and task_c2_2);
+task_v_121 : (not task_c1_2);
+task_v_122 : (task_v_120 or task_v_121);
+task_s_9_St_12_On_1 : ((1 when task_v_122) default -1);
+task_r_4_St_12_On : ((1 when task_v_122) default task_pnr_4);
+task_v_123 : (task_onn and task_c1_2);
+task_v_124 : (not task_c2_2);
+task_v_125 : (task_v_123 or task_v_124);
+task_s_9_St_12_Off_1 : ((-1 when task_v_125) default 1);
+task_s_9_1 : ((task_s_9_St_12_Off_1 when task_ck_17_1)
+  default task_s_9_St_12_On_1);
+task_r_4_St_12_Off : ((1 when task_v_125) default task_pnr_4);
+task_r_4 : ((task_r_4_St_12_Off when task_ck_17_1)
+  default task_r_4_St_12_On);
+task_ck_18_1 : task_s_9_1;
+task_ns_4_St_12_On_1 : -1;
+task_nr_4_St_12_On : -1;
+task_luz_on_St_12_On : 1;
+task_ns_4_St_12_Off_1 : 1;
+task_ns_4_1 : ((task_ns_4_St_12_Off_1 when task_ck_18_1)
+  default task_ns_4_St_12_On_1);
+task_nr_4_St_12_Off : -1;
+task_nr_4 : ((task_nr_4_St_12_Off when task_ck_18_1)
+  default task_nr_4_St_12_On);
+task_luz_on_St_12_Off : -1;
+task_luz_on : ((task_luz_on_St_12_Off when task_ck_18_1)
+  default task_luz_on_St_12_On);
+task_lamp_on : task_luz_on;
+task_v_126 : (task_onn_1 and task_c2_3);
+task_v_127 : (not task_c1_3);
+task_v_128 : (task_v_126 or task_v_127);
+task_s_8_St_11_On_1 : ((1 when task_v_128) default -1);
+task_r_3_St_11_On : ((1 when task_v_128) default task_pnr_3);
+task_v_129 : (task_onn_1 and task_c1_3);
+task_v_130 : (not task_c2_3);
+task_v_131 : (task_v_129 or task_v_130);
+task_s_8_St_11_Off_1 : ((-1 when task_v_131) default 1);
+task_s_8_1 : ((task_s_8_St_11_Off_1 when task_ck_19_1)
+  default task_s_8_St_11_On_1);
+task_r_3_St_11_Off : ((1 when task_v_131) default task_pnr_3);
+task_r_3 : ((task_r_3_St_11_Off when task_ck_19_1)
+  default task_r_3_St_11_On);
+task_ck_20_1 : task_s_8_1;
+task_ns_3_St_11_On_1 : -1;
+task_nr_3_St_11_On : -1;
+task_luz_on_1_St_11_On : 1;
+task_ns_3_St_11_Off_1 : 1;
+task_ns_3_1 : ((task_ns_3_St_11_Off_1 when task_ck_20_1)
+  default task_ns_3_St_11_On_1);
+task_nr_3_St_11_Off : -1;
+task_nr_3 : ((task_nr_3_St_11_Off when task_ck_20_1)
+  default task_nr_3_St_11_On);
+task_luz_on_1_St_11_Off : -1;
+task_luz_on_1 : ((task_luz_on_1_St_11_Off when task_ck_20_1)
+  default task_luz_on_1_St_11_On);
+task_tv_on : task_luz_on_1;
+task_v_132 : (not task_precense_1);
+task_s_7_St_10_Ocupied_1 : ((1 when task_v_132) default -1);
+task_r_2_St_10_Ocupied : ((1 when task_v_132) default task_pnr_2);
+task_s_7_St_10_Empty_1 : ((-1 when task_precense_1) default 1);
+task_s_7_1 : ((task_s_7_St_10_Empty_1 when task_ck_21_1)
+  default task_s_7_St_10_Ocupied_1);
+task_r_2_St_10_Empty : ((1 when task_precense_1) default task_pnr_2);
+task_r_2 : ((task_r_2_St_10_Empty when task_ck_21_1)
+  default task_r_2_St_10_Ocupied);
+task_ck_22_1 : task_s_7_1;
+task_ns_2_St_10_Ocupied_1 : -1;
+task_nr_2_St_10_Ocupied : -1;
+task_room_oc_1_St_10_Ocupied : 1;
+task_ns_2_St_10_Empty_1 : 1;
+task_ns_2_1 : ((task_ns_2_St_10_Empty_1 when task_ck_22_1)
+  default task_ns_2_St_10_Ocupied_1);
+task_nr_2_St_10_Empty : -1;
+task_nr_2 : ((task_nr_2_St_10_Empty when task_ck_22_1)
+  default task_nr_2_St_10_Ocupied);
+task_room_oc_1_St_10_Empty : -1;
+task_room_oc_1 : ((task_room_oc_1_St_10_Empty when task_ck_22_1)
+  default task_room_oc_1_St_10_Ocupied);
+task_room_oc : task_room_oc_1;
+task_v_133 : (not task_c_door_1);
+task_v_134 : (task_push or task_v_133);
+task_s_6_St_9_Open_1 : ((1 when task_v_134) default -1);
+task_r_1_St_9_Open : ((1 when task_v_134) default task_pnr_1);
+task_v_135 : (task_push and task_c_door_1);
+task_s_6_St_9_Closed_1 : ((-1 when task_v_135) default 1);
+task_s_6_1 : ((task_s_6_St_9_Closed_1 when task_ck_23_1)
+  default task_s_6_St_9_Open_1);
+task_r_1_St_9_Closed : ((1 when task_v_135) default task_pnr_1);
+task_r_1 : ((task_r_1_St_9_Closed when task_ck_23_1)
+  default task_r_1_St_9_Open);
+task_ck_24_1 : task_s_6_1;
+task_ns_1_St_9_Open_1 : -1;
+task_nr_1_St_9_Open : -1;
+task_door_open_1_St_9_Open : 1;
+task_ns_1_St_9_Closed_1 : 1;
+task_ns_1_1 : ((task_ns_1_St_9_Closed_1 when task_ck_24_1)
+  default task_ns_1_St_9_Open_1);
+task_nr_1_St_9_Closed : -1;
+task_nr_1 : ((task_nr_1_St_9_Closed when task_ck_24_1)
+  default task_nr_1_St_9_Open);
+task_door_open_1_St_9_Closed : -1;
+task_door_open_1 : ((task_door_open_1_St_9_Closed when task_ck_24_1)
+  default task_door_open_1_St_9_Open);
+task_door_open : task_door_open_1;
+task_v_136 : (not task_c_window_1);
+task_v_137 : (task_push_1 or task_v_136);
+task_s_5_St_8_Open_1 : ((1 when task_v_137) default -1);
+task_r_St_8_Open : ((1 when task_v_137) default task_pnr);
+task_v_138 : (task_push_1 and task_c_window_1);
+task_s_5_St_8_Closed_1 : ((-1 when task_v_138) default 1);
+task_s_5_1 : ((task_s_5_St_8_Closed_1 when task_ck_25_1)
+  default task_s_5_St_8_Open_1);
+task_r_St_8_Closed : ((1 when task_v_138) default task_pnr);
+task_r : ((task_r_St_8_Closed when task_ck_25_1) default task_r_St_8_Open);
+task_ck_26_1 : task_s_5_1;
+task_ns_St_8_Open_1 : -1;
+task_nr_St_8_Open : -1;
+task_window_open_1_St_8_Open : 1;
+task_ns_St_8_Closed_1 : 1;
+task_ns_1_2 : ((task_ns_St_8_Closed_1 when task_ck_26_1)
+  default task_ns_St_8_Open_1);
+task_nr_St_8_Closed : -1;
+task_nr : ((task_nr_St_8_Closed when task_ck_26_1)
+  default task_nr_St_8_Open);
+task_window_open_1_St_8_Closed : -1;
+task_window_open_1 : ((task_window_open_1_St_8_Closed when task_ck_26_1)
+  default task_window_open_1_St_8_Open);
+task_window_open : task_window_open_1;
+initialisations : concat(initialisations, [(task_v_420 = -1)]);
+evolutions : concat(evolutions, [(task_ns_8_2 default task_v_420)]);
+initialisations : concat(initialisations, [(task_v_419 = -1)]);
+evolutions : concat(evolutions, [(task_ns_8_1 default task_v_419)]);
+initialisations : concat(initialisations, [(task_pnr_8 = -1)]);
+evolutions : concat(evolutions, [(task_nr_8 default task_pnr_8)]);
+initialisations : concat(initialisations, [(task_v_400 = -1)]);
+evolutions : concat(evolutions, [(task_ns_7_2 default task_v_400)]);
+initialisations : concat(initialisations, [(task_v_399 = -1)]);
+evolutions : concat(evolutions, [(task_ns_7_1 default task_v_399)]);
+initialisations : concat(initialisations, [(task_pnr_7 = -1)]);
+evolutions : concat(evolutions, [(task_nr_7 default task_pnr_7)]);
+initialisations : concat(initialisations, [(task_v_364 = 1)]);
+evolutions : concat(evolutions, [(task_ns_6_3 default task_v_364)]);
+initialisations : concat(initialisations, [(task_v_363 = 1)]);
+evolutions : concat(evolutions, [(task_ns_6_2 default task_v_363)]);
+initialisations : concat(initialisations, [(task_v_362 = 1)]);
+evolutions : concat(evolutions, [(task_ns_6_1 default task_v_362)]);
+initialisations : concat(initialisations, [(task_pnr_6 = -1)]);
+evolutions : concat(evolutions, [(task_nr_6 default task_pnr_6)]);
+initialisations : concat(initialisations, [(task_v_311 = -1)]);
+evolutions : concat(evolutions, [(task_ns_5_3 default task_v_311)]);
+initialisations : concat(initialisations, [(task_v_310 = -1)]);
+evolutions : concat(evolutions, [(task_ns_5_2 default task_v_310)]);
+initialisations : concat(initialisations, [(task_v_309 = 1)]);
+evolutions : concat(evolutions, [(task_ns_5_1 default task_v_309)]);
+initialisations : concat(initialisations, [(task_pnr_5 = -1)]);
+evolutions : concat(evolutions, [(task_nr_5 default task_pnr_5)]);
+initialisations : concat(initialisations, [(task_ck_17_1 = 1)]);
+evolutions : concat(evolutions, [(task_ns_4_1 default task_ck_17_1)]);
+initialisations : concat(initialisations, [(task_pnr_4 = -1)]);
+evolutions : concat(evolutions, [(task_nr_4 default task_pnr_4)]);
+initialisations : concat(initialisations, [(task_ck_19_1 = 1)]);
+evolutions : concat(evolutions, [(task_ns_3_1 default task_ck_19_1)]);
+initialisations : concat(initialisations, [(task_pnr_3 = -1)]);
+evolutions : concat(evolutions, [(task_nr_3 default task_pnr_3)]);
+initialisations : concat(initialisations, [(task_ck_21_1 = 1)]);
+evolutions : concat(evolutions, [(task_ns_2_1 default task_ck_21_1)]);
+initialisations : concat(initialisations, [(task_pnr_2 = -1)]);
+evolutions : concat(evolutions, [(task_nr_2 default task_pnr_2)]);
+initialisations : concat(initialisations, [(task_ck_23_1 = 1)]);
+evolutions : concat(evolutions, [(task_ns_1_1 default task_ck_23_1)]);
+initialisations : concat(initialisations, [(task_pnr_1 = -1)]);
+evolutions : concat(evolutions, [(task_nr_1 default task_pnr_1)]);
+initialisations : concat(initialisations, [(task_ck_25_1 = 1)]);
+evolutions : concat(evolutions, [(task_ns_1_2 default task_ck_25_1)]);
+initialisations : concat(initialisations, [(task_pnr = -1)]);
+evolutions : concat(evolutions, [(task_nr default task_pnr)]);
+task_v_69 : (task_lamp_on or task_tv_on);
+task_v_68 : (not task_room_oc);
+task_rule1 : (task_v_68 or task_v_69);
+task_v_66 : (task_door_open or task_window_open);
+task_v_67 : (not task_v_66);
+task_rule2 : (task_room_oc or task_v_67);
+task_v_70 : (task_rule1 and task_rule2);
+task_v_64 : (a_iminv(task_ss, 1) + 1);
+task_v_63 : (a_iminv(task_ss, 0) + 1);
+task_v_65 : (task_v_63 or task_v_64);
+task_v_61 : (task_door_open or task_window_open);
+task_v_62 : (not task_v_61);
+task_rule3 : (task_v_62 or task_v_65);
+task_v_71 : (task_v_70 and task_rule3);
+task_v_59 : (a_inf(task_ss, 1) + 1);
+task_v_57 : (task_lamp_on or task_tv_on);
+task_v_58 : (not task_v_57);
+task_v_60 : (task_v_58 and task_v_59);
+task_rule4 : (task_room_oc or task_v_60);
+task_v_72 : (task_v_71 and task_rule4);
+task_ck_2 : task_sp_2;
+task_ck_1 : task_sp_1;
+task_ck_2_1 : task_ck_2;
+task_ck_2_0 : task_ck_2;
+task_v_55 : (task_p1 + task_p2);
+task_v_56 : (task_v_55 + task_p3);
+task_rule5_S1 : (a_inf(task_v_56, 3000) + 1);
+task_v_282 : ((1 when task_ck_2_0) default task_rule5_S1);
+task_v_53 : (task_p1 + task_p2);
+task_v_54 : (task_v_53 + task_p3);
+task_rule5_S2 : (a_inf(task_v_54, 5000) + 1);
+task_v : (task_p1 + task_p2);
+task_v_52 : (task_v + task_p3);
+task_rule5_S3 : (a_inf(task_v_52, 7000) + 1);
+task_v_283 : ((task_rule5_S3 when task_ck_2_1) default task_rule5_S2);
+task_rule5 : ((task_v_283 when task_ck_1) default task_v_282);
+task_v_73 : (task_v_72 and task_rule5);
+task_assume : 1;
+task_guarantee : task_v_73;
+initialisations : concat(initialisations, [(task_error_state = 1)]);
+evolutions : concat(evolutions, [task_guarantee]);
+constraints : [((task_up1^2) = 1), ((task_down1^2) = 1), ((task_up2^2) = 1),
+               ((task_down2^2) = 1), ((task_s^2) = 1), ((task_e^2) = 1),
+               ((task_finish^2) = 1), ((task_start^2) = 1), ((task_cold^2)
+               = 1), ((task_temp_ok^2) = 1), ((task_eco^2) = 1),
+               ((task_confort^2) = 1), ((task_on_lamp^2) = 1),
+               ((task_on_tv^2) = 1), ((task_precense^2) = 1),
+               ((task_push_door^2) = 1), ((task_push_window^2) = 1),
+               ((task_c_window^2) = 1), ((task_c_door^2) = 1),
+               ((task_c_tv1^2) = 1), ((task_c_tv2^2) = 1), ((task_c_lamp2^2)
+               = 1), ((task_c_lamp1^2) = 1), ((task_c4^2) = 1), ((task_c3^2)
+               = 1), ((task_c2^2) = 1), ((task_c1^2) = 1), (task_assume = 1)];
+
+% --- outputs : [task_pl, task_p1, task_p2, task_p3, task_ss, task_sp_2,
+                 task_sp_1, task_lamp_on, task_tv_on, task_room_oc,
+                 task_door_open, task_window_open] --- %
+task : processus(conditions, states, evolutions, initialisations,
+                 [gen(constraints)], controllables);
+task_init : initial(task);
+task : S_Security(task,B_True(task,task_error_state));
+dcs_result : equal(task_init,initial(task));
+if dcs_result then
+    print("task: synthesis succeeded.")
+else
+    print("task: synthesis failed.");
+
+if dcs_result then
+    print("Triangulation and controller generation...")
+else
+    quit(1);
+declare(p_task_c_window, p_task_c_door, p_task_c_tv1, p_task_c_tv2,
+        p_task_c_lamp2, p_task_c_lamp1, p_task_c4, p_task_c3, p_task_c2,
+        p_task_c1);
+phantom_vars : [p_task_c_window, p_task_c_door, p_task_c_tv1, p_task_c_tv2,
+                p_task_c_lamp2, p_task_c_lamp1, p_task_c4, p_task_c3,
+                p_task_c2, p_task_c1];
+task_triang : Triang(constraint(task),controllables,phantom_vars);
+controller_inputs : [task_up1, task_down1, task_up2, task_down2, task_s,
+                     task_e, task_finish, task_start, task_cold,
+                     task_temp_ok, task_eco, task_confort, task_on_lamp,
+                     task_on_tv, task_precense, task_push_door,
+                     task_push_window, task_v_420, task_v_419, task_pnr_8,
+                     task_v_400, task_v_399, task_pnr_7, task_v_364,
+                     task_v_363, task_v_362, task_pnr_6, task_v_311,
+                     task_v_310, task_v_309, task_pnr_5, task_ck_17_1,
+                     task_pnr_4, task_ck_19_1, task_pnr_3, task_ck_21_1,
+                     task_pnr_2, task_ck_23_1, task_pnr_1, task_ck_25_1,
+                     task_pnr, p_task_c_window, p_task_c_door, p_task_c_tv1,
+                     p_task_c_tv2, p_task_c_lamp2, p_task_c_lamp1, p_task_c4,
+                     p_task_c3, p_task_c2, p_task_c1];
+heptagon_controller("task_controller.ept","task",controller_inputs,controllables,task_triang);
+
