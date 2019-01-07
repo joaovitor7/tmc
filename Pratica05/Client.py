@@ -111,7 +111,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template("main.html")
+    return render_template("main.html",resposta = []))
 
 @app.route("/resposta", methods=["POST"])\ndef resposta():\n\tif (request.method == "POST"):\n\t\t%s\n\t\t%s\n\t\tr = requests.get(url)\n\t\tresposta = json.dumps(r.text)\n\t\tstringResposta = r.text[1:-1]\n\t\tlistaResposta = stringResposta.split(',')\n\t\tdef lineToHtml(line):\n\t\t\tline = line\n\t\t\treturn  line\n\t\tresposta = list(map(lineToHtml,listaResposta))\n\t\treturn render_template('/', resposta)
 if __name__ == '__main__':

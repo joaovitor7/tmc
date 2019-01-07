@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+            <title>task</title>
+        </head>
+        
+        <body>
+            <div class="container">
+                <h1>task</h1>
+               
+        
+        
+            <div class="row">
+                <div class="col-xs-5">
+                    <form action = "/resposta" method = "POST"
+                          enctype = "multipart/form-data">
+                        <div class="form-group">
+                            <label for="exampleInputFile">Insira as entradas dos automatos</label>
+            <div class="checkbox">
+                <label><input type="checkbox" name = "up1">up1</label>
+            </div>
+
+            <div class="checkbox">
+                <label><input type="checkbox" name = "down1">down1</label>
+            </div>
+
+            <div class="checkbox">
+                <label><input type="checkbox" name = "up2">up2</label>
+            </div>
+
+            <div class="checkbox">
+                <label><input type="checkbox" name = "down2">down2</label>
+            </div>
+
+            <div class="checkbox">
+                <label><input type="checkbox" name = "s">s</label>
+            </div>
+
+            <div class="checkbox">
+                <label><input type="checkbox" name = "e">e</label>
+            </div>
+
+            <div class="checkbox">
+                <label><input type="checkbox" name = "finish">finish</label>
+            </div>
+
+            <div class="checkbox">
+                <label><input type="checkbox" name = "start">start</label>
+            </div>
+
+            <div class="checkbox">
+                <label><input type="checkbox" name = "cold">cold</label>
+            </div>
+
+            <div class="checkbox">
+                <label><input type="checkbox" name = "temp_ok">temp_ok</label>
+            </div>
+
+            <div class="checkbox">
+                <label><input type="checkbox" name = "eco">eco</label>
+            </div>
+
+            <div class="checkbox">
+                <label><input type="checkbox" name = "confort">confort</label>
+            </div>
+
+            <div class="checkbox">
+                <label><input type="checkbox" name = "on_lamp">on_lamp</label>
+            </div>
+
+            <div class="checkbox">
+                <label><input type="checkbox" name = "on_tv">on_tv</label>
+            </div>
+
+            <div class="checkbox">
+                <label><input type="checkbox" name = "precense">precense</label>
+            </div>
+
+            <div class="checkbox">
+                <label><input type="checkbox" name = "push_door">push_door</label>
+            </div>
+
+            <div class="checkbox">
+                <label><input type="checkbox" name = "push_window">push_window</label>
+            </div> <small id="fileHelp" class="form-text text-muted">Os inputs devem conter somente 0 e 1.</small>
+                        </div>
+        
+                        <input class="btn btn-success" type = "submit"/>
+                    </form>
+            <div>
+              <h1>Resultado</h1>
+
+
+
+                        {% for r in resposta %}
+
+                            <p>{{ r }}</p>
+
+                        {% endfor %}
+            
+            </div>       
+        
+                </div>
+            </div>
+            </div>
+        </body>
+        </html>
