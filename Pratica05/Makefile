@@ -86,7 +86,7 @@ clean:
 	rm -f $(CTRLR_PROG).ept
 	rm -f $(SIM_WEB).c $(SIM_WEB).o $(SIM_WEB)_sim mainWeb.py
 	rm -Rf ./templates
-
+	rm -f Client.pyc prog.py.save
 # Dependences
 
 $(HEPT_OBJS) $(SIM_PROG)_c/_main.o: $(CTRLR_C_FILES)
