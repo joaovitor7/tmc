@@ -30,11 +30,17 @@ def startWithNode(line):
 def searchForTypes(line):
 
   if line[0:4] == 'type':
-    line = line.split(' ')
-    tipoName = line[1]
-    tipoTipos = line[-1].split('|')
-    tipos.append(tipoName)
-    tiposEspecias[tipoName] = numBits(len(tipoTipos))
+    
+    nome = re.sub('\=.*','',line)
+    nome = nome.split(' ')
+    nome = nome[1].strip()
+
+    
+    tipoTipos = line.split('=')
+    tipoTipos = tipoTipos[-1].split('|')
+
+    tipos.append(nome)
+    tiposEspecias[nome] = numBits(len(tipoTipos))
 
 lines = file.readlines()
 list(map(searchForTypes, lines))

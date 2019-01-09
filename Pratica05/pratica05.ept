@@ -24,7 +24,7 @@ let
 	end
 tel
 
-type spl = S1|S2|S3
+type spl = S1 | S2 | S3
 
 node police(eco, confort: bool) returns (pl: int; s: spl)
 let
