@@ -95,7 +95,9 @@ declaracoes ="int step_c;int step_max;"
 
 def concateDec(x):
   global declaracoes
-  declaracoes = declaracoes+"int %s;"%(x)
+  #declaracoes = declaracoes+"int %s;"%(x)
+  #ao iniciar as variáveis com 0, ao dar um get no webservice não será necessário passar todos os parâmetros
+  declaracoes = declaracoes+"int %s=0;"%(x)
 
 
 list(map(concateDec,task['entradas']))
