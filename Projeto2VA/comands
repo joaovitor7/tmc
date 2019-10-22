@@ -1,3 +1,6 @@
+#instalar libmicrohttpd-dev no terminal
+#sudo apt install libmicrohttp-dev
+
 
 gcc -I /usr/local/lib/heptagon/c -c -o webservices.o -g -fstack-protector  webservices.c
 
