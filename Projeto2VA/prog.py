@@ -1,5 +1,6 @@
 import sys
-import re
+import re #adicionado por jhonata fernandes para a função regex
+
 
 file = open(sys.argv[1],'r')
 
@@ -30,10 +31,20 @@ def lineToAutomaton(line):
   entradas = entradas.split(":")[0]
   entradas = entradas.split(",")
   print entradas
-  
+
+  #uma melhor maneira de organizar as saídas
+  saidasx = line[1].strip()[1:-1]
+  print (saidasx)
+  saidas = re.sub(": int;", ",",saidasx)
+  saidas = re.sub(": bool;", "",saidas)
+  saidas = saidas.split(",")
+  print saidas
+  print("----------")
+
+
+  '''
   saidas = line[1].strip()[1:-1]
   print (saidas)
-
   
   def subst(x):
     
@@ -61,7 +72,7 @@ def lineToAutomaton(line):
     
   saidas = saidas.split(",")
   print saidas
-  print("----------")
+  print("----------")'''
 
   automaton = {'name':name,'entradas': entradas,'saidas':saidas}
 
@@ -84,7 +95,9 @@ declaracoes ="int step_c;int step_max;"
 
 def concateDec(x):
   global declaracoes
-  declaracoes = declaracoes+"int %s;"%(x)
+  #declaracoes = declaracoes+"int %s;"%(x)
+  #ao iniciar as variáveis com 0, ao dar um get no webservice não será necessário passar todos os parâmetros
+  declaracoes = declaracoes+"int %s=0;"%(x)
 
 
 list(map(concateDec,task['entradas']))
