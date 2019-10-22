@@ -2,4 +2,7 @@
 gcc -I /usr/local/lib/heptagon/c -c -o webservices.o -g -fstack-protector  webservices.c
 
 
-gcc -o executavel webservices.o washingMachine.o /usr/lib/x86_64-linux-gnu/libmicrohttpd.so
+gcc -o executavel webservices.o NomeDoSeuProjeto.o /usr/lib/x86_64-linux-gnu/libmicrohttpd.so
+
+#caso tenha controlador no projeto, será necessário adicionar o controller.o no 2º comando
+#gcc -o executavel webservices.o NomeDoSeuProjeto.o Controlador.o /usr/lib/x86_64-linux-gnu/libmicrohttpd.so
